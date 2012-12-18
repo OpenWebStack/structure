@@ -10,8 +10,6 @@ module.exports = function(grunt){
     //watch
     //livereload
 
-    //TODO add assertion lib in settings (should and expect --require stuff)
-    //TODO add reporter to config also. Cool
     test: {
       node: {
         runner: 'mocha',
@@ -22,31 +20,36 @@ module.exports = function(grunt){
       browser: {
         runner: 'testacular',
         reporter: 'min',
-        config: 'config/testacular.conf.js',
-        // browsers: ['Chrome', 'Firefox']
-        browsers: ['Chrome']
+        assertion: 'expect',
+        config: 'config/testacular.conf.js', //configure testacular there
+        browsers: ['Chrome'] //can add other browsers including PhantomJS
       }
     }
 
   });
 
-  /* TODO 
+  /* TODO
   move to separate project on github
-   */
+  can't --watch on grunt test (both node and browser) cause first one stalls
+  watch task that runs the tests, w testacular server already running
+  */
   var child = require('child_process');
   grunt.registerMultiTask('test', 'Run Mocha unit tests', function(){
     var done = this.async();
     var tests = this.data.tests;
     var reporter = ' --reporter ' + this.data.reporter || 'dot';
     var assertion = this.data.assertion ? ' --require ' + this.data.assertion : '';
-    var cmd;
+    var argv = require('optimist').argv;
+    var cmd, watch;
 
     if(this.data.runner === 'mocha'){
-      cmd = 'mocha test ' + tests + reporter + assertion;
+      watch = (argv.watch) ? ' --watch' : '';
+      cmd = 'mocha test ' + tests + reporter + assertion + watch + ' --colors';
       run(cmd);
     }
     else if (this.data.runner === 'testacular'){
-      cmd = 'testacular start ' + this.data.config + ' --single-run=true --require expect --browsers=' + this.data.browsers.join(',');
+      watch = (argv.watch) ? ' --single-run=false' : ' --single-run=true';
+      cmd = 'testacular start ' + this.data.config + assertion + watch + ' --browsers=' + this.data.browsers.join(',');
       run(cmd);
     }
 

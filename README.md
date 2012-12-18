@@ -3,6 +3,17 @@ The goal of this project is to demonstrate the ideal setup and best practices wh
 
 These tools are extremely powerful and complementary when used correctly together. More explanation to come. 
 
+##Getting Started
+We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](http://vojtajina.github.com/testacular/) for managing the project. This doesn't mean you have to use Node as your backend. Node + Express is a great way to go, but feel free to use Java or whatever you prefer. Let's get setup:
+
+1. Make sure you have [NodeJS](http://nodejs.org/) installed
+2. Make sure you have [git](http://git-scm.com/book/en/Getting-Started-Installing-Git) installed
+3. $ git clone https://github.com/OpenWebStack/structure.git && cd structure
+4. $ npm install -g grunt-cli testacular@canary stylus
+5. $ npm install
+
+Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project Node tools. That's it!
+
 ##Benefits of this RequireJS + AngularJS setup
 RequireJS has a few main benefits:
 1. No more globals
@@ -10,7 +21,7 @@ RequireJS has a few main benefits:
 3. Powerful "client-side middleware" via plugins
 3. Killer optimization using r.js
 
-The catch is that you have to use AMD syntax all over otherwise you still have globals and things get messy. But Angular provides a great way to write code (directives, controllers, services etc) without the use of globals:
+The downside is that you have to use AMD syntax all over otherwise you still have globals and things get messy. But luckily Angular provides a great way to write code (directives, controllers, services etc) without the use of globals:
 
 ```js
 //add a controller to the 'app' module
@@ -42,6 +53,9 @@ require(['app'], function(){
   });
 });
 ```
+
+Also our unit tests can be simpler since we don't have to worry about loading things with AMD for the tests. 
+
 See the full [bootstrap.js file](https://github.com/OpenWebStack/structure/blob/master/app/js/bootstrap.js) that we load using RequireJS. 
 Now all our files are loaded async which is great for performance, as the DomContentLoaded event will trigger *before* your scripts are parsed/executed istead of after (aka stuff shows up on the page even faster than simply putting scripts at the bottom of the body tag). 
 
@@ -59,3 +73,15 @@ require('ng!templates/slider.html')
 If there are some less-frequently used templates (like an admin page) that you'd rather load-on-demand, just don't use this plugin and let Angular do its default behavior. 
 
 This plugin also generates an actual AMD module for each template during the build, inlining the HTML as a JavaScript string and bundling all your templates into your one bootstrap.js file. You'll notice significant performance gains with this strategy.
+
+##Testing
+Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD).
+
+###Tools & Conventions
+We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. Tests that are pure JavaScript (don't use DOM) can run in Node and use [should.js](https://github.com/visionmedia/should.js/) for assertions. Place these in the `test/node` directory. Tests that run in browsers (need DOM) are best run simultaniously in your target browsers with [testacular](http://vojtajina.github.com/testacular/) and [expect.js](https://github.com/LearnBoost/expect.js) for assertions. Place these in the `test/browser` directory.
+
+Note: Many people like Jasmine as well, and that's a fine choice too. Mocha is just simpler and handles async setup/teardown/tests much better, and has an easier time testing AMD modules. Mocha also lets you choose your style (TDD, BDD etc).
+
+###Running Tests
+Run the tests via [Grunt](http://gruntjs.com/). If you follow the above conventions then your Gruntfile.js is already setup for you. `grunt test:node` runs the node tests, and `grunt test:browser` runs the browser tests, `grunt test` runs them all. To run the tests automatically whenever you save, use the `--watch` flag (currently only works on node or browser, not both simultaneously).
+
