@@ -1,0 +1,11 @@
+{
+  "name": "App",
+  "version" : "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "should": "1.2.x",
+    "expect.js": "0.2.x",
+    "optimist": "0.3.x"
+  }
+}
