@@ -6,10 +6,6 @@
 
 var env = this['window'] ? 'browser' : 'node';
 
-if(env === 'browser'){
-  angular.module('templates', []);
-}
-
 define(['text'], function(text){
   //fails during the build. Might have to just inline the HTML, leaving angular out of it. 
   return {
@@ -18,7 +14,6 @@ define(['text'], function(text){
       var _this = this;
       text.get(req.toUrl(name), function(html) {
         if(env === 'browser'){
-          //todo this is also what will get generated in write()
           angular.module('templates').run(['$http', '$templateCache', function($http, $templateCache){
             console.log('prefetching template: ', name);
             $templateCache.put(name, html);
