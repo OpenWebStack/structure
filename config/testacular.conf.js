@@ -1,8 +1,3 @@
-/* 
-TODO 
-  actually test the controllers to make sure we have things setup right
-*/
-
 var argv = require('optimist').argv;
 var assertion = argv.require;
 
