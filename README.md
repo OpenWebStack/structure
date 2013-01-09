@@ -11,6 +11,7 @@ We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](htt
 3. $ git clone https://github.com/OpenWebStack/structure.git && cd structure
 4. $ npm install -g grunt-cli testacular@canary stylus
 5. $ npm install
+6. (optional) install [PhantomJS](http://phantomjs.org/) for running tests during the build
 
 Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project Node tools. That's it!
 
@@ -74,14 +75,16 @@ If there are some less-frequently used templates (like an admin page) that you'd
 
 This plugin also generates an actual AMD module for each template during the build, inlining the HTML as a JavaScript string and bundling all your templates into your one bootstrap.js file. You'll notice significant performance gains with this strategy.
 
-##Testing
-Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD).
+##Testing Your Project
+Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. We also use [Grunt](http://gruntjs.com/) for running tests and performing other project tasks. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests. 
 
-###Tools & Conventions
-We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. Tests that are pure JavaScript (don't use DOM) can run in Node and use [should.js](https://github.com/visionmedia/should.js/) for assertions. Place these in the `test/node` directory. Tests that run in browsers (need DOM) are best run simultaniously in your target browsers with [testacular](http://vojtajina.github.com/testacular/) and [expect.js](https://github.com/LearnBoost/expect.js) for assertions. Place these in the `test/browser` directory.
+###Run the Node tests
+Tests that are pure JavaScript (don't use DOM) can run in Node and use [should.js](https://github.com/visionmedia/should.js/) for assertions. Place these in the `test/node` directory.
 
-Note: Many people like Jasmine as well, and that's a fine choice too. Mocha is just simpler and handles async setup/teardown/tests much better, and has an easier time testing AMD modules. Mocha also lets you choose your style (TDD, BDD etc).
+Run `grunt simplemocha`.
 
-###Running Tests
-Run the tests via [Grunt](http://gruntjs.com/). If you follow the above conventions then your Gruntfile.js is already setup for you. `grunt test:node` runs the node tests, and `grunt test:browser` runs the browser tests, `grunt test` runs them all. To run the tests automatically whenever you save, use the `--watch` flag (currently only works on node or browser, not both simultaneously).
+###Run the Browser tests
+Tests that run in browsers (need DOM) are best run simultaniously in your target browsers with [testacular](http://vojtajina.github.com/testacular/) and [expect.js](https://github.com/LearnBoost/expect.js) for assertions. Place these in the `test/browser` directory.
+
+Run `grunt testacular:unit` to start the testacular server. Then in a new terminal window run `grunt watch`. Now whenever you save a JS file the tests will run automatically.
 

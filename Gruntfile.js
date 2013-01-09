@@ -2,106 +2,58 @@ module.exports = function(grunt){
   //grunt plugins
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-clear');
+  grunt.loadNpmTasks('gruntacular');
+  grunt.loadNpmTasks('grunt-simple-mocha');
 
   //config
   grunt.initConfig({
-    //todo
+    //TODO:
+    //phantomjs for tests during build
     //jshint
     //requirejs
     //stylus
     //livereload
-    //watch
+    //webserver (connect)
+    //clear
 
     watch: {
-      //clear terminal before outputting anything new
-      // clear: {
-      //   files: ['app/js/**/*.js', 'test/**/*.js'],
-      //   tasks: ['clear']
-      // },
-      test: {
-        files: ['app/js/**/*.js', 'test/**/*.js'],
-        tasks: ['test:browser:run']
+      //run unit tests with testacular (server needs to be already running)
+      testacular: {
+        files: ['app/js/**/*.js', 'test/browser/**/*.js'],
+        tasks: ['testacular:unit:run']
+      },
+      node: {
+        files: ['server/**/*.js', 'test/node/**/*.js'],
+        tasks: ['simplemocha']
       }
     },
 
-    test: {
-      node: {
-        runner: 'mocha',
-        reporter: 'dot',
-        assertion: 'should',
-        tests: 'test/node'
+    //for tests that run in browsers
+    testacular: {
+      //start testacular server (the watch task will run the tests when files change)
+      unit: {
+        configFile: 'config/testacular.conf.js',
       },
-      browser: {
-        runner: 'testacular',
-        reporter: 'min',
-        assertion: 'expect',
-        config: 'config/testacular.conf.js', //configure testacular there
-        browsers: ['Chrome'] //can add other browsers including PhantomJS
-      }
-    }
+      //continuous integration mode for the build: run tests once in PhantomJS browser.
+      continuous: {
+        configFile: 'config/testacular.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      },
+    },
 
-  });
-
-  // start testacular server on watch
-  grunt.registerTask('dev', ['test:browser', 'watch']);
-
-  /* TODO
-  watch task that runs the tests, w testacular server already running
-  move to separate project on github
-  can't --watch on grunt test (both node and browser) cause first one stalls
-  */
-  var child = require('child_process');
-  grunt.registerMultiTask('test', 'Run Mocha unit tests with Mocha cli or Testacular', function(){
-    var done = this.async();
-    var tests = this.data.tests;
-    var reporter = ' --reporter ' + this.data.reporter || 'dot';
-    var assertion = this.data.assertion ? ' --require ' + this.data.assertion : '';
-    var argv = require('optimist').argv;
-    var runonly = this.flags.run;
-    var cmd, watch;
-
-    if(this.data.runner === 'mocha'){
-      //todo anything with run?
-      watch = (argv.watch) ? ' --watch' : '';
-      cmd = 'mocha test ' + tests + reporter + assertion + watch + ' --colors';
-      run(cmd);
-    }
-    else if (this.data.runner === 'testacular'){
-      watch = (argv.watch) ? ' --single-run=false' : ' --single-run=true';
-      if(runonly){
-        //try running tests. If fail cause no server, start the server
-        cmd = 'testacular run';
-        run(cmd, function(){
-          var settings = grunt.config.data.test.browser;
-          console.log('starting testacular server');
-          //TODO DRY
-          cmd = 'testacular start ' + settings.config + assertion + ' --browsers=' + settings.browsers.join(',');        
-          run(cmd);
-        });
-        
-      }
-      else{
-        //TODO grunt needs to not close down the testacular process
-        cmd = 'testacular start ' + this.data.config + assertion + watch + ' --browsers=' + this.data.browsers.join(',');        
-        run(cmd);
-      }   
-    }
-
-    function run(cmd, errback){
-      var ps = child.exec(cmd);
-      ps.stdout.pipe(process.stdout);
-      ps.stderr.pipe(process.stderr);
-      ps.on('exit', function(code, message){
-        if(code !== 0){
-          if(errback){
-            errback(code, message);
-          }
-          else{
-            grunt.fail.warn('tests failed');
-          }
-        }
-        done();
-      }); 
+    //for tests that run in Node
+    simplemocha: {
+      options: {
+        require: 'should',
+        timeout: 3000,
+        ignoreLeaks: false,
+        ui: 'bdd',
+        reporter: 'dot'
+      },
+      all: { src: 'test/node/**/*.js' }
     }
   });
+
+  grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
 };

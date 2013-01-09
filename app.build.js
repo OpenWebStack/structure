@@ -2,7 +2,7 @@
   appDir: "app/",
   baseUrl: "js/",
   dir: "app-build/",
-  optimize: 'none',
+  // optimize: 'none',
   mainConfigFile: 'app/js/bootstrap.js',
   modules: [
     {name: "bootstrap"}
