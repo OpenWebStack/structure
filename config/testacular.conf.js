@@ -1,16 +1,3 @@
-/* 
-TODO 
-  actually test the controllers to make sure we have things setup right
-*/
-
-var argv = require('optimist').argv;
-var assertion = argv.require;
-
-var assertionLibs = {
-  'expect': 'node_modules/expect.js/expect.js',
-  'should': null //can't use should in browser
-}
-
 basePath = '../';
 
 files = [
@@ -19,6 +6,8 @@ files = [
   //source files
   'app/js/lib/angular/angular.js',
   'app/js/lib/angular/angular-*.js',
+  //test assertion lib and mocks
+  'node_modules/expect.js/expect.js',
   'test/lib/angular/angular-mocks.js',
   //main app module
   'app/js/app.js',
@@ -34,18 +23,9 @@ exclude = [
   'app/js/lib/ng.js'
 ];
 
-if(assertion){
-  if(assertion === 'should'){
-    console.log("WARNING: should.js is intented for Node tests, not browsers."+
-      "Please use expect.js for browser tests.");
-  }
-  if(!assertionLibs[assertion]) console.log('WARNING: the only current option for browser assertion is "expect". Please update your Gruntfile.js');
-  files.push(assertionLibs[assertion]);
-}
-
-autoWatch = true;
-
 browsers = ['Chrome'];
+require = 'expect';
+reporters = ['dots'];
 
 junitReporter = {
   outputFile: 'test_out/unit.xml',
