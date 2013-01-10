@@ -10,5 +10,8 @@
     "grunt-clear": "0.1.x",
     "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
     "gruntacular": "~0.1.0"
+  },
+  "dependencies": {
+    "express": "~3.0.6"
   }
 }
