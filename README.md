@@ -58,7 +58,7 @@ require(['app'], function(){
 Also our unit tests can be simpler since we don't have to worry about loading things with AMD for the tests. 
 
 See the full [bootstrap.js file](https://github.com/OpenWebStack/structure/blob/master/app/js/bootstrap.js) that we load using RequireJS. 
-Now all our files are loaded async which is great for performance, as the DomContentLoaded event will trigger *before* your scripts are parsed/executed istead of after (aka stuff shows up on the page even faster than simply putting scripts at the bottom of the body tag). 
+Now all our files are loaded async which is great for performance, as the DomContentLoaded event will trigger *before* your scripts are parsed/executed instead of after (aka stuff shows up on the page even faster than simply putting scripts at the bottom of the body tag). 
 
 ##Optimizing
 Loading async is great for performance, but loading a hundered separate scripts is terrible. Rule #1 for performance (especially on mobile) is to reduce the number of requests. So we combine them using r.js, RequireJS's build tool. It's quite robust and configurable, and does a great job combining and minifying all our JS into a single file, which is still loaded asynchronously by RequireJS. RequireJS takes a "build profile" configuration file that gives you fine-grained control over the build. See the sample [app.build.js](https://github.com/OpenWebStack/structure/blob/master/app.build.js) for this setup, and [full documentation on r.js](http://requirejs.org/docs/optimization.html) for more settings. 
@@ -66,7 +66,7 @@ Loading async is great for performance, but loading a hundered separate scripts 
 ##Templates
 There are a number of ways to use Angular templates. The most common are the `ng-view` directive, routes that point to a `templateUrl`, and inside of other directives. Whenever Angular first encounters the use of a template, it fetches it via an AJAX request, stores the fetched HTML into an Angular template and caches it in the templateCache for future use. This default behavior isn't ideal for most applications, it's better to load your templates up front so that navigation between views is instant (no additional requests). 
 
-RequireJS gives us a powerful tool for handling non-JS dependencies like this: loader plugins. See [ng.js](https://github.com/OpenWebStack/structure/blob/master/app/js/lib/ng.js), a loader plugin that will prefetch all your Angular templates on application startup, and cache them into the templateCache for use everywhere. You then load your templates with the plugin like so:
+RequireJS gives us a powerful tool for handling non-JS dependencies like this: loader plugins. See [ng.js](https://github.com/OpenWebStack/structure/blob/master/app/js/lib/ng.js), a loader plugin that will prefetch all your Angular templates on application startup, and cache them into the templateCache for use everywhere. You load your templates with the plugin like so:
 
 ```js
 require('ng!templates/slider.html')
