@@ -9,9 +9,7 @@ module.exports = function(grunt){
   //config
   grunt.initConfig({
     //TODO:
-    //phantomjs for tests during build
     //jshint
-    //requirejs
     //stylus
     //livereload
     //webserver (connect)
@@ -78,4 +76,5 @@ module.exports = function(grunt){
   });
 
   grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
+  grunt.registerTask('build', ['requirejs']);
 };
