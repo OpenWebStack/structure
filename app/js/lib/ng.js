@@ -30,7 +30,6 @@ define(['text'], function(text){
         var content = this.buildMap[name];
         //generate inlined, cached angular template
         var output = 'define("' + pluginName + '!' + name + '", function(){\n' +
-            // 'return Handlebars.template(' + content + ') \n' +
           'angular.module("templates").run(["$http", "$templateCache", function($http, $templateCache){\n' +
             '$templateCache.put("'+name+'", "'+this.escapeHTML(content)+'");' + 
             '}]);\n' + 

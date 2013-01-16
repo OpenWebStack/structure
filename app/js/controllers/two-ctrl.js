@@ -1,4 +1,4 @@
-/* Example controller that has a dependency to be injected */
+/* Example controller that has dependencies to be injected */
 
 angular.module('app').controller('MyCtrl2', ['$scope', 'version', function($scope, version){
   $scope.people = ['Jim', 'Jimmies', 'Jummy'];

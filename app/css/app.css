@@ -28,3 +28,21 @@
   content: "";
   padding: 0;
 }
+
+.users{
+  list-style-type: none;
+  padding-left: 10px;
+  font-size: 18px;
+}
+
+.users input{
+  display: block;
+}
+
+input[type="button"]{
+  margin-top: 10px;
+}
+
+.awesome{
+  color: #56dd00;
+}

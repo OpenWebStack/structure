@@ -15,10 +15,12 @@ require.config({
 require(['app'], function(){
   //now that the app module loaded
   require([
+    'lib/angular/angular-resource',
     'ng!templates/partial1.html',
     'ng!templates/partial2.html',
     'controllers/one-ctrl', 
     'controllers/two-ctrl',
+    'services/user',
     'services/version-service', 
     'filters/version-filter',
     'directives/version-directive'

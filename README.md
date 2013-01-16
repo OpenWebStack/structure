@@ -15,6 +15,11 @@ We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](htt
 
 Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project Node tools. That's it!
 
+##Running the App
+Make sure you're in the structure directory, and run:
+`$ node server/server.js`
+Now open your browser to `localhost:3000`. Node will serve up `app/index.html` as the home page. You'll see an Angular+RequireJS application running that demonstrates some of Angular's core concepts, and best practices for creating robust, scalable, and performant Angular apps.
+
 ##Benefits of this RequireJS + AngularJS setup
 RequireJS has a few main benefits:
 1. No more globals

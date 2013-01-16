@@ -1,8 +1,8 @@
 /* Declare templates module, used for pre-loading templates */
 angular.module('templates', []);
 
-/* Declare app module */
-angular.module('app', ['templates']).
+/* Declare app module that has dependencies on the templates and ngResource modules */
+angular.module('app', ['templates', 'ngResource']).
   config(['$routeProvider', function($routeProvider) {
     //setup URL routes
     $routeProvider.when('/view1', {templateUrl: 'templates/partial1.html', controller: 'MyCtrl1'});
