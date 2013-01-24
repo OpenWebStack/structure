@@ -1,0 +1,19 @@
+/**
+ * stretch an element, defaults to fill it's containing element.
+ * override any value by passing named argument
+ * cancel any value by passing false (top: false) and that direction won't be applied
+ *
+ * Examples: 
+ * stretch();
+ * stretch(top:200px, bottom: 100px);
+ * stretch(top: false);
+ * stretch(left: 50px, right: 50px);
+ * stretch(top: 100px, right: 200px, bottom: 25px, left: 200px)
+ */
+stretch(top = 0, right = 0, bottom = 0, left = 0)
+  position absolute
+  array = "top" "right" "bottom" "left"
+  args = top right bottom left
+  for pos, key in array
+    if pos != false
+      {pos} : args[key]

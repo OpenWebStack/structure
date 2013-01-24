@@ -1,0 +1,47 @@
+@import('reset');
+@import('mixins/stretch');
+@import('mixins/clearfix');
+
+//colors
+bg = #eee;
+positive = #56dd00;
+
+body{
+  background: bg;
+}
+
+h1{
+  color: darken(bg, 75%);
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+  li{
+    display: inline;
+  }
+}
+
+.users{
+  list-style-type: none;
+  padding-left: 10px;
+  font-size: 18px;
+  input{
+    display: block;
+    font-size: 18px;
+    height: 30px;
+    margin: 5px 0;
+  }
+}
+
+input[type="button"]{
+  margin-top: 10px;
+}
+
+.awesome{
+  color: positive;
+}

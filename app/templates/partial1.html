@@ -5,9 +5,9 @@
   - conditionally applying the ".awesome" css class if user.awesome is set to true (which happens after save to server).
   - calling saveAll() in our controller when the button is clicked, which then updates all the users on the server
 -->
-<ul class="users">
+<div class="users">
   <input ng-repeat="user in users" ng-model="user.name" ng-class="{awesome : user.awesome}">
   </input>
   <input type="button" value="Save Changes" ng-click="saveAll()"></input>
-</ul>
+</div>
 <hr/>

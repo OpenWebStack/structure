@@ -5,12 +5,12 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('gruntacular');
   grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
 
   //config
   grunt.initConfig({
     //TODO:
     //jshint
-    //stylus
     //livereload
     //webserver (connect)
     //clear
@@ -24,6 +24,10 @@ module.exports = function(grunt){
       node: {
         files: ['server/**/*.js', 'test/node/**/*.js'],
         tasks: ['simplemocha']
+      },
+      stylus: {
+        files: ['app/styles/**/*.styl'],
+        tasks: ['stylus']
       }
     },
 
@@ -53,6 +57,16 @@ module.exports = function(grunt){
       all: { src: 'test/node/**/*.js' }
     },
 
+    //stylus css
+    stylus: {
+      compile: {
+        //specify each "combined" file. Each file can then use @import() to bring in its dependencies
+        files: {
+          'app/styles/app.css': 'app/styles/app.styl'
+        }
+      }
+    },
+
     //build
     requirejs: {
       compile: {
@@ -68,7 +82,8 @@ module.exports = function(grunt){
           removeCombined: true, //in the build delete files that get concatenated into others
           logLevel: 0, //output results as they happen
           findNestedDependencies: true, //add nested requires to the build
-          optimizeCss: "standard",
+          //TODO might not need this with the stylus optimizing
+          optimizeCss: "standard", 
           inlineText: true
         }
       }
