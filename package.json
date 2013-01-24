@@ -2,14 +2,15 @@
   "name": "App",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "0.4.0rc4",
+    "grunt": "0.4.0rc7",
     "should": "1.2.x",
     "expect.js": "0.2.x",
     "grunt-contrib-watch": "0.2.x",
     "grunt-contrib-requirejs": "~0.3.4",
     "grunt-clear": "0.1.x",
     "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
-    "gruntacular": "~0.1.0"
+    "gruntacular": "~0.1.0",
+    "grunt-contrib-stylus": "0.4.0rc7"
   },
   "dependencies": {
     "express": "~3.0.6"
