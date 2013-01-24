@@ -67,7 +67,7 @@ module.exports = function(grunt){
       }
     },
 
-    //build
+    //combine & compress scripts
     requirejs: {
       compile: {
         options: {
@@ -91,5 +91,5 @@ module.exports = function(grunt){
   });
 
   grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
-  grunt.registerTask('build', ['requirejs']);
+  grunt.registerTask('build', ['stylus', 'requirejs']);
 };
