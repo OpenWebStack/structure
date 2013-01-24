@@ -68,6 +68,33 @@ Now all our files are loaded async which is great for performance, as the DomCon
 ##Grunt
 [Grunt](http://gruntjs.com/) is a task-based command-line tool for JavaScript. It's very useful during development, able to watch your files for changes and automatically run your tests, lint your files, and even refresh your browser automatically. Grunt is also great for build, optimization, and other project tasks. The Grunt community is large and there are hundreds of contributed plugins we can leverage in our projects. 
 
+##Working with CSS & Stylus
+CSS is a wonderful declarative layout method, but as a language it lacks some necessary features that would promote modularity and code reuse, such as variables, functions, mixins, and calculations. Some of these features are coming in a future version of CSS, but we can enjoy them now by using [Stylus](http://learnboost.github.com/stylus/) — a CSS preprocessor that compiles into regular CSS. Stylus is a powerful tool that can significantly improve the maintainability of your stylesheets, but you still need to really learn CSS.
+
+To use Stylus we'll use the [grunt-contrib-stylus](https://github.com/gruntjs/grunt-contrib-stylus/) plugin and add the following to our Gruntfile.js:
+
+```js
+stylus: {
+  compile: {
+    files: {
+      'app/styles/app.css': 'app/styles/app.styl'
+    }
+  }
+}
+```
+Now running `$ grunt stylus` will compile the stylus file into a CSS file. Running this manually every time we change a style would not be ideal, so we'll automate it using the grunt watch task:
+
+```js
+watch: {
+  stylus: {
+    files: ['app/styles/**/*.styl'],
+    tasks: ['stylus']
+  }
+}
+```
+
+Now we'll simply run `$ grunt watch` before working on stylesheets and they'll compile automatically on save. 
+
 ##Optimizing Your Project
 Loading async is great for performance, but loading a hundered separate scripts is terrible. Rule #1 for performance (especially on mobile) is to reduce the number of HTTP requests. So we use r.js, RequireJS's build tool to cut out all those extra requests. It's quite robust and configurable, and does a great job combining and minifying all our JS into a single file, which is still loaded asynchronously by RequireJS. RequireJS takes some configuration settings, which we'll add to our Gruntfile.js like so:
 
@@ -100,7 +127,7 @@ If there are some less-frequently used templates (like an admin page) that you'd
 This plugin also generates an actual AMD module for each template during the build, inlining the HTML template as a JavaScript string and bundling all your templates into your one bootstrap.js file! You'll notice significant performance gains with this strategy.
 
 ##Testing Your Project
-Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests. 
+Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests.
 
 ###Run the Node tests
 Tests that are pure JavaScript (don't use DOM) can run in Node and use [should.js](https://github.com/visionmedia/should.js/) for assertions. Place these in the `test/node` directory.
