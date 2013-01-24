@@ -1,17 +1,17 @@
 #Structure
 The goal of this project is to demonstrate the ideal setup and best practices when working with AngularJS, RequireJS, jQuery, Stylus, Grunt, and Mocha. Feel free to submit ideas and improvements via pull requests. 
 
-These tools are extremely powerful and complementary when used correctly together. More explanation to come. 
+These tools are extremely powerful and complementary when used correctly together.
 
 ##Getting Started
 We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](http://vojtajina.github.com/testacular/) for managing the project. This doesn't mean you have to use Node as your backend. Node + Express is a great way to go, but feel free to use Java or whatever you prefer. Let's get setup:
 
 1. Make sure you have [NodeJS](http://nodejs.org/) installed
 2. Make sure you have [git](http://git-scm.com/book/en/Getting-Started-Installing-Git) installed
-3. $ git clone https://github.com/OpenWebStack/structure.git && cd structure
-4. $ npm install -g grunt-cli testacular@canary stylus
-5. $ npm install
-6. (optional) install [PhantomJS](http://phantomjs.org/) for running tests during the build
+3. `$ git clone https://github.com/OpenWebStack/structure.git && cd structure`
+4. `$ npm install -g grunt-cli testacular@canary stylus`
+5. `$ npm install`
+6. (optional) `install [PhantomJS](http://phantomjs.org/)` for running tests during the build
 
 Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project Node tools. That's it!
 
@@ -27,7 +27,7 @@ RequireJS has a few main benefits:
 3. Powerful "client-side middleware" via plugins
 3. Killer optimization using r.js
 
-The downside is that you have to use AMD syntax all over otherwise you still have globals and things get messy. But luckily Angular provides a great way to write code (directives, controllers, services etc) without the use of globals:
+The downside is that you have to add AMD boilerplate to all your files. But luckily Angular provides a great way to write code (directives, controllers, services etc) without the use of globals:
 
 ```js
 //add a controller to the 'app' module
@@ -60,10 +60,10 @@ require(['app'], function(){
 });
 ```
 
-Also our unit tests can be simpler since we don't have to worry about loading things with AMD for the tests. 
+Also our unit tests can be simpler since we don't have to worry about loading asynchronously for the tests. 
 
-See the full [bootstrap.js file](https://github.com/OpenWebStack/structure/blob/master/app/js/bootstrap.js) that we load using RequireJS. 
-Now all our files are loaded async which is great for performance, as the DomContentLoaded event will trigger *before* your scripts are parsed/executed instead of after (aka stuff shows up on the page even faster than simply putting scripts at the bottom of the body tag).
+See the full [bootstrap.js file](https://github.com/OpenWebStack/structure/blob/master/app/js/bootstrap.js). RequireJS loads this file, which then instructs RequireJS to load everything else in our application.
+All our files are loaded async which is great for performance, as the DomContentLoaded event will trigger *before* your scripts are parsed/executed instead of after (i.e. content shows up on the page faster than simply putting scripts at the bottom of the body tag).
 
 ##Grunt
 [Grunt](http://gruntjs.com/) is a task-based command-line tool for JavaScript. It's very useful during development, able to watch your files for changes and automatically run your tests, lint your files, and even refresh your browser automatically. Grunt is also great for build, optimization, and other project tasks. The Grunt community is large and there are hundreds of contributed plugins we can leverage in our projects. 
@@ -96,7 +96,7 @@ watch: {
 Now we'll simply run `$ grunt watch` before working on stylesheets and they'll compile automatically on save. 
 
 ##Optimizing Your Project
-Loading async is great for performance, but loading a hundered separate scripts is terrible. Rule #1 for performance (especially on mobile) is to reduce the number of HTTP requests. So we use r.js, RequireJS's build tool to cut out all those extra requests. It's quite robust and configurable, and does a great job combining and minifying all our JS into a single file, which is still loaded asynchronously by RequireJS. RequireJS takes some configuration settings, which we'll add to our Gruntfile.js like so:
+Loading async is great for performance, but loading a hundered separate scripts is not so good. Rule #1 for performance (especially on mobile) is to reduce the number of HTTP requests. So we use r.js, RequireJS's build tool, to cut out all those extra requests. It's quite robust and configurable, and does a great job combining and minifying all our scripts into a single file, which is still loaded asynchronously by RequireJS. RequireJS takes some configuration settings, which we'll add to our Gruntfile.js like so:
 
 ```js
 requirejs: {
