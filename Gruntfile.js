@@ -80,7 +80,7 @@ module.exports = function(grunt){
         configure: function(builder) {
           builder.use(require("nghtml")({
             webroot: "app",
-            module: "app",
+            module: "open-web-stack-app",
             dev: true
           }));
           builder.use(require("component-json")());
