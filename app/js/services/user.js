@@ -3,6 +3,8 @@
  */
 var app = require("..");
 
+require("angular-resource");
+
 /*
  * User Service
  *
