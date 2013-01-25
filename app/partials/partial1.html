@@ -6,8 +6,9 @@
   - calling saveAll() in our controller when the button is clicked, which then updates all the users on the server
 -->
 <div class="users">
-  <input ng-repeat="user in users" ng-model="user.name" ng-class="{awesome : user.awesome}">
-  </input>
-  <input type="button" value="Save Changes" ng-click="saveAll()"></input>
+  <form data-ng-submit="saveAll()">
+    <input data-ng-repeat="user in users" data-ng-model="user.name" data-ng-class="{awesome : user.awesome}" />
+    <input type="submit" value="Save Changes" />
+  </form>
 </div>
 <hr/>

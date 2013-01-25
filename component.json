@@ -1,0 +1,33 @@
+{
+  "name": "structure",
+  "repo": "CamShaft/structure",
+  "description": "OpenWebStack Structure",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "CamShaft/component-angular": "1.0.3",
+    "CamShaft/component-angular-resource": "1.0.3"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "app/js/controllers/index.js",
+    "app/js/controllers/one.js",
+    "app/js/controllers/two.js",
+    "app/js/directives/index.js",
+    "app/js/directives/version.js",
+    "app/js/filters/index.js",
+    "app/js/filters/version.js",
+    "app/js/services/index.js",
+    "app/js/services/user.js",
+    "app/js/services/version.js",
+    "app/js/app.js",
+    "index.js"
+  ],
+  "stylus": [
+    "app/css/app.styl"
+  ],
+  "styles": [
+
+  ]
+}

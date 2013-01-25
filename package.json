@@ -1,6 +1,7 @@
 {
   "name": "App",
   "version": "0.1.0",
+  "main": "server/app.js",
   "devDependencies": {
     "grunt": "0.4.0rc7",
     "should": "1.2.x",

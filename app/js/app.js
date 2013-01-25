@@ -1,11 +1,43 @@
-/* Declare templates module, used for pre-loading templates */
-angular.module('templates', []);
+/*
+ * Module dependencies
+ */
+var angular = require("angular");
+require("angular-resource")
+require("./controllers");
+require("./directives");
+require("./filters");
+require("./services");
 
-/* Declare app module that has dependencies on the templates and ngResource modules */
-angular.module('app', ['templates', 'ngResource']).
-  config(['$routeProvider', function($routeProvider) {
-    //setup URL routes
-    $routeProvider.when('/view1', {templateUrl: 'templates/partial1.html', controller: 'MyCtrl1'});
-    $routeProvider.when('/view2', {templateUrl: 'templates/partial2.html', controller: 'MyCtrl2'});
-    $routeProvider.otherwise({redirectTo: '/view1'});
-  }]);
+/*
+ * Expose the app
+ */
+var app = module.exports = angular.module("app", [
+  "ngResource",
+  "app.controllers",
+  "app.directives",
+  "app.filters",
+  "app.services"
+]);
+
+/*
+ * Configure the app
+ */
+app.config([
+  '$routeProvider',
+  '$locationProvider',
+
+  function($routeProvider, $locationProvider) {
+    $routeProvider
+      .when("/view1", {
+        templateUrl: "/partials/partial1.html",
+        controller: "MyCtrl1"
+      })
+      .when("/view2", {
+        templateUrl: "/partials/partial2.html",
+        controller: "MyCtrl2"
+      })
+      .otherwise({
+        redirectTo: "/view1"
+      });
+  }
+]);

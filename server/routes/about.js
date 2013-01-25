@@ -1,5 +1,8 @@
-module.exports = function(app){
-  app.get('/about', function(req, res){
-    res.end('<h1>About '+ app.get('info').name +'</h1>');
-  });
+/*
+ * Expose the about page
+ */
+module.exports.index = function() {
+  return function index(req, res, next) {
+    res.send('<h1>About '+ app.get('info').name +'</h1>');
+  };
 };
