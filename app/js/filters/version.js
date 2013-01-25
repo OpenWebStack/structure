@@ -1,17 +1,29 @@
 /*
  * Module dependencies
  */
-var filters = require("angular").module("app.filters");
+var app = require("..")
+  , VersionService = require("../services/version");
 
 /*
+ * interpolate
+ *
  * Interpolate the version text
  */
-module.exports = filters.filter('interpolate', [
-  'version',
+function interpolate(version) {
+  return function(text) {
+    return String(text).replace(/\%VERSION\%/mg, version);
+  };
+};
 
-  function(version) {
-    return function(text) {
-      return String(text).replace(/\%VERSION\%/mg, version);
-    };
-  }
+/*
+ * Register it with angular
+ */
+app.filter(interpolate.name, [
+  VersionService,
+  interpolate
 ]);
+
+/*
+ * Let others know where to find it
+ */
+module.exports = interpolate.name;

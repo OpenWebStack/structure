@@ -1,17 +1,29 @@
 /*
  * Module dependencies
  */
-var directives = require("angular").module("app.directives");
+var app = require("..")
+  , VersionService = require("../services/version");
 
 /*
+ * appVersion
+ *
  * Directive for displaying the app version
  */
-module.exports = directives.directive('appVersion', [
-  'version',
+function appVersion(version) {
+  return function(scope, elem, attrs) {
+    elem.text(version);
+  };
+};
 
-  function(version) {
-    return function(scope, elem, attrs) {
-      elem.text(version);
-    };
-  }
+/*
+ * Register it with angular
+ */
+app.directive(appVersion.name, [
+  VersionService,
+  appVersion
 ]);
+
+/*
+ * Let others know where to find it
+ */
+module.exports = appVersion.name;

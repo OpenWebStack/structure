@@ -1,9 +1,22 @@
 /*
  * Module dependencies
  */
-var services = require("angular").module("app.services");
+var app = require("..")
+  , package = require("../../../package.json");
 
 /*
- * Export the version of the app
+ * Version Service
+ *
+ * Give access to the app version
  */
-module.exports = services.value('version', '0.2.0');
+var version = package.version;
+
+/*
+ * Register it with angular
+ */
+app.value("version", version);
+
+/*
+ * Let others know where to find it
+ */
+module.exports = "version";

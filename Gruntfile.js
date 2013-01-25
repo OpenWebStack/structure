@@ -1,7 +1,7 @@
 module.exports = function(grunt){
   //grunt plugins
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-component-build');
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('gruntacular');
   grunt.loadNpmTasks('grunt-simple-mocha');
@@ -16,17 +16,21 @@ module.exports = function(grunt){
     //clear
 
     watch: {
-      //run unit tests with testacular (server needs to be already running)
-      testacular: {
-        files: ['app/js/**/*.js', 'test/browser/**/*.js'],
-        tasks: ['testacular:unit:run']
+      component: {
+        files: ["app/js/**/*.js", "app/css/**/*.css", "app/partials/**/*.nghtml"],
+        tasks: ['component']
       },
+      //run unit tests with testacular (server needs to be already running)
+      // testacular: {
+      //   files: ['app/js/**/*.js', 'test/browser/**/*.js'],
+      //   tasks: ['testacular:unit:run']
+      // },
       node: {
         files: ['server/**/*.js', 'test/node/**/*.js'],
         tasks: ['simplemocha']
       },
       stylus: {
-        files: ['app/styles/**/*.styl'],
+        files: ['app/css/**/*.styl'],
         tasks: ['stylus']
       }
     },
@@ -62,34 +66,31 @@ module.exports = function(grunt){
       compile: {
         //specify each "combined" file. Each file can then use @import() to bring in its dependencies
         files: {
-          'app/styles/app.css': 'app/styles/app.styl'
+          'app/css/app.css': 'app/css/app.styl'
         }
       }
     },
 
-    //combine & compress scripts
-    requirejs: {
-      compile: {
-        options: {
-          appDir: "app/",
-          baseUrl: "js/",
-          dir: "app-build/",
-          optimize: 'none',
-          mainConfigFile: 'app/js/bootstrap.js',
-          modules: [
-            {name: "bootstrap"}
-          ],
-          removeCombined: true, //in the build delete files that get concatenated into others
-          logLevel: 0, //output results as they happen
-          findNestedDependencies: true, //add nested requires to the build
-          //TODO might not need this with the stylus optimizing
-          optimizeCss: "standard", 
-          inlineText: true
+    component: {
+      app: {
+        output: 'build',
+        styles: true,
+        scripts: [ 'app/js/**/*.js' ],
+        sourceUrls: true,
+        configure: function(builder) {
+          builder.use(require("nghtml")({
+            webroot: "app",
+            module: "app",
+            dev: true
+          }));
+          builder.use(require("component-json")());
         }
       }
     }
+    
   });
 
   grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
-  grunt.registerTask('build', ['stylus', 'requirejs']);
+  grunt.registerTask('build', ['stylus', 'component']);
+  grunt.registerTask("default", ["build"]);
 };

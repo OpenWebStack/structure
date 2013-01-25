@@ -1,24 +1,36 @@
 /*
  * Module dependencies
  */
-var controllers = require("angular").module("app.controllers");
+var app = require("..")
+  , UserService = require("../services/user");
 
 /*
- * User service will fetch the user information 
+ * MyCtrl1
+ *
+ * Manages user info through CRUD operations
  */
-module.exports = controllers.controller('MyCtrl1', [
-  '$scope',
-  'User',
+function MyCtrl1($scope, User) {
+  var users = User.query(function(){
+    $scope.users = users;
+  });
 
-  function($scope, User){
-    var users = User.query(function(){
-      $scope.users = users;
+  $scope.saveAll = function(){
+    $scope.users.forEach(function(user){
+      user.$update();
     });
+  };
+};
 
-    $scope.saveAll = function(){
-      $scope.users.forEach(function(user){
-        user.$update();
-      });
-    };
-  }
+/*
+ * Register it with angular
+ */
+app.controller(MyCtrl1.name, [
+  '$scope',
+  UserService,
+  MyCtrl1
 ]);
+
+/*
+ * Let others know where to find it
+ */
+module.exports = MyCtrl1.name;
