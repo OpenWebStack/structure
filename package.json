@@ -15,7 +15,7 @@
     "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
     "gruntacular": "~0.1.0",
     "grunt-contrib-stylus": "0.4.0rc7",
-    "grunt-component-build": "~0.1.5",
+    "grunt-component-build": "git+https://github.com/CamShaft/grunt-component-build.git",
     "nghtml": "~0.1.0",
     "component-json": "~0.1.0"
   }
