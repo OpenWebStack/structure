@@ -1,0 +1,28 @@
+{
+  "name": "open-web-stack-app",
+  "repo": "OpenWebStack/structure",
+  "description": "OpenWebStack Structure",
+  "version": "0.1.0",
+  "keywords": [],
+  "dependencies": {
+    "CamShaft/component-angular": "1.0.3",
+    "CamShaft/component-angular-resource": "1.0.3"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "app/js/config.js",
+  "scripts": [
+    "app/js/**/*.js",
+    "index.js"
+  ],
+  "styles": [
+    "app/css/app.styl"
+  ],
+  "templates": [
+    "app/partials/partial1.nghtml",
+    "app/partials/partial2.nghtml"
+  ],
+  "json": [
+    "package.json"
+  ]
+}
