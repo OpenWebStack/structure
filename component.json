@@ -10,6 +10,7 @@
   },
   "development": {},
   "license": "MIT",
+  "main": "app/js/config.js",
   "scripts": [
     "app/js/**/*.js",
     "index.js"
