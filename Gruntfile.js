@@ -74,6 +74,7 @@ module.exports = function(grunt){
     component: {
       app: {
         output: 'build',
+        standalone: true,
         styles: true,
         scripts: [ 'app/js/**/*.js' ],
         sourceUrls: true,
