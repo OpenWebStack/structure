@@ -12,14 +12,10 @@
  * Only `require` dependencies that ship as part of this component, 
  * keeping it portable across projects. Let Angular inject whatever is named 'User' at runtime.
  * 
- * PROS
- * Angular pieces (controllers, services, directives etc):
- * 
  * CONS
- * these can't be used in a non-component project, unless built with --standalone.
- * migration from Angular to Angular+Component entails modifying every file.
- *
- * QUESTIONS
+ * These can't be used in a non-component project, unless built with --standalone.
+ * Migration from Angular to Angular+Component entails modifying every file.
+ * But apps that care about that could skip the module.exports wrapper and use a global `app`.
  */
 
 /**

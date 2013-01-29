@@ -8,12 +8,12 @@ var partial1 = require("../partials/partial1")
 //Initialize the directives used outside of the controllers 
 var versionDirective = require("./directives/version");
 
-//Initialize Services
+//Initialize services
 require("./services/user");
 
 //Initialize the controllers
 require("./controllers/one")(app, 'MyCtrl1');
-require("./controllers/two");
+require("./controllers/two")(app, 'MyCtrl2');
 
 //Configure the app
 app.config([
