@@ -3,7 +3,7 @@
   "repo": "OpenWebStack/structure",
   "description": "OpenWebStack Structure",
   "version": "0.1.0",
-  "main": "app/js/app.js",
+  "main": "app/js/config.js",
   "keywords": [],
   "dependencies": {
     "CamShaft/component-angular": "1.0.3",
@@ -12,8 +12,7 @@
   "development": {},
   "license": "MIT",
   "scripts": [
-    "app/js/**/*.js",
-    "index.js"
+    "app/js/**/*.js"
   ],
   "styles": [
     "app/css/app.styl"
