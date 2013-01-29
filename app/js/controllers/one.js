@@ -1,12 +1,9 @@
-/*
- * Module dependencies
- */
-var app = require("..")
-  , UserService = require("../services/user");
+//Module dependencies
+var app = require("..");
+var UserService = require("../services/user");
 
 /*
  * MyCtrl1
- *
  * Manages user info through CRUD operations
  */
 function MyCtrl1($scope, User) {
@@ -19,18 +16,14 @@ function MyCtrl1($scope, User) {
       user.$update();
     });
   };
-};
+}
 
-/*
- * Register it with angular
- */
+//Register it with angular
 app.controller(MyCtrl1.name, [
   '$scope',
   UserService,
   MyCtrl1
 ]);
 
-/*
- * Let others know where to find it
- */
+//Let others know where to find it
 module.exports = MyCtrl1.name;
