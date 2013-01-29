@@ -52,13 +52,12 @@ module.exports = function(grunt){
     //for tests that run in Node
     simplemocha: {
       options: {
-        require: 'should',
         timeout: 3000,
         ignoreLeaks: false,
         ui: 'bdd',
         reporter: 'dot'
       },
-      all: { src: 'test/node/**/*.js' }
+      all: { src: ['node_modules/should/lib/should.js', 'test/node/**/*.js'] }
     },
 
     //stylus css

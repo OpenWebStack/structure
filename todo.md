@@ -1,5 +1,4 @@
 #todo
-- once grunt-simple-mocha merges PR #12 update package.json
 - better README that explains directory structure, like the Angular seed
 - e2e tests
 - finish setting up grunt tasks

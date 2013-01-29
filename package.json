@@ -12,7 +12,7 @@
     "expect.js": "0.2.x",
     "grunt-contrib-watch": "0.2.x",
     "grunt-clear": "0.1.x",
-    "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
+    "grunt-simple-mocha": "~0.3.2",
     "gruntacular": "~0.1.0",
     "grunt-contrib-stylus": "0.4.0rc7",
     "grunt-component-build": "~0.1.5",
