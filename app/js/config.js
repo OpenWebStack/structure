@@ -9,7 +9,7 @@ var partial1 = require("../partials/partial1")
 var versionDirective = require("./directives/version");
 
 //Initialize the controllers
-require("./controllers/one");
+require("./controllers/one")(app, 'MyCtrl1');
 require("./controllers/two");
 
 //Configure the app

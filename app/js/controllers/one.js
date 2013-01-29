@@ -1,33 +1,37 @@
 /**
  * DESIGN IDEA
- * decouple this ng controller from any module or structure assumptions
+ * decouple this ng controller from the module, name, and directory structure
+ * controller can be reused across many projects easily
  * no need to export anything
- * what about name? would be cool if it didn't even assume the name, name it elsewhere!
+ *
+ * PROS
+ * controller can be reused across many projects easily
+ * 
+ * CONS
+ * this directive can't be used in a non-component project, unless built with --standalone.
+ *
+ * QUESTIONS
+ * what to do about dependencies? Should I require in the services here or elsewhere?
  */
 
-//Module dependencies
-var app = require("../app");
-var UserService = require("../services/user");
-
-/*
- * MyCtrl1
- * Manages user info through CRUD operations
+/**
+ * Manage user info through CRUD operations
+ * @param  {Object} app  Angular Module to attach to
+ * @param  {String} name what to name the controller
  */
-function MyCtrl1($scope, User) {
-  var users = User.query(function(){
-    $scope.users = users;
-  });
+module.exports = function(app, name){
+  //Module dependencies... inject via component?
+  var UserService = require("../services/user");
 
-  $scope.saveAll = function(){
-    $scope.users.forEach(function(user){
-      user.$update();
+  app.controller(name, ['$scope', UserService, function($scope, User){
+    var users = User.query(function(){
+      $scope.users = users;
     });
-  };
-}
 
-//Register it with angular
-app.controller(MyCtrl1.name, [
-  '$scope',
-  UserService,
-  MyCtrl1
-]);
+    $scope.saveAll = function(){
+      $scope.users.forEach(function(user){
+        user.$update();
+      });
+    };
+  }]);
+};
