@@ -1,4 +1,5 @@
 //Global dependencies
+require("angular");
 require("angular-resource");
 
 //Module dependencies
