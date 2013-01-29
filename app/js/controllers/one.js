@@ -1,9 +1,11 @@
 /**
  * DESIGN IDEA
- * decouple this ng controller from the module, name, and directory structure
- * controller can be reused across many projects easily
- * no need to export anything
- *
+ * Decouple this ng controller from the module, name, and directory structure
+ * Controller can be reused across many projects easily
+ * No need to export anything
+ * Only `require` dependencies that ship as part of this component, 
+ * keeping it portable across projects. Let Angular inject whatever is named 'User' at runtime
+ * 
  * PROS
  * controller can be reused across many projects easily
  * 
@@ -20,11 +22,8 @@
  * @param  {String} name what to name the controller
  */
 module.exports = function(app, name){
-  //Module dependencies... inject via component?
-  //probably should only "require" things that ship as part of this component, to keep it portable
-  var UserService = require("../services/user");
 
-  app.controller(name, ['$scope', UserService, function($scope, User){
+  app.controller(name, ['$scope', 'User', function($scope, User){
     var users = User.query(function(){
       $scope.users = users;
     });
