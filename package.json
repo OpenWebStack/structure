@@ -1,6 +1,6 @@
 {
   "name": "open-web-stack-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "server/app.js",
   "dependencies": {
     "express": "~3.0.6",

@@ -7,6 +7,8 @@ files = [
   'app/js/lib/angular.js',
   'app/js/lib/angular-*.js',
   'build/app.js',
+
+  //have to require the app module
   './run.js',
   
   //test assertion lib and mocks
@@ -19,12 +21,6 @@ files = [
   //tests to run
   'test/browser/**/*.js'
 ];
-
-//keep it simple: exclude any AMD/bootstrapping stuff
-// exclude = [
-//   'app/js/bootstrap.js',
-//   'app/js/lib/ng.js'
-// ];
 
 browsers = ['Chrome'];
 require = 'expect';
