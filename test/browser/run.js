@@ -1,0 +1,1 @@
+require("open-web-stack-app");

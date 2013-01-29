@@ -1,6 +1,6 @@
 describe('MyCtrl2', function(){
   var scope, ctrl;
-  beforeEach(module('app'));
+  beforeEach(module('open-web-stack-app'));
   beforeEach(inject(function($rootScope, $controller) {
     scope = $rootScope.$new();
     ctrl = $controller('MyCtrl2', {$scope: scope, version: '9.9.9'});
