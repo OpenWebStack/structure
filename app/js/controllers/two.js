@@ -1,11 +1,8 @@
 /*
  * This controller demonstrates computed properties
  */
-var VersionFilter = require("../filters/version")
-  , VersionService = require("../services/version");
-
 module.exports = function(app, name){
-  app.controller(name, ['$scope', VersionService, function($scope, version){
+  app.controller(name, ['$scope', 'version', function($scope, version){
     $scope.people = ['Jim', 'Jimmies', 'Jummy'];
     //has a dependency on our version service, which we will mock out when testing this controller
     $scope.version = version + '!';

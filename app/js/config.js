@@ -1,3 +1,6 @@
+//Global dependencies
+require("angular-resource");
+
 //Module dependencies
 var app = require("./app");
 
@@ -6,10 +9,14 @@ var partial1 = require("../partials/partial1")
   , partial2 = require("../partials/partial2");
 
 //Initialize the directives used outside of the controllers 
-var versionDirective = require("./directives/version");
+require("./directives/version")(app, 'appVersion');
 
 //Initialize services
-require("./services/user");
+require("./services/user")(app, 'User');
+require("./services/version")(app, 'version');
+
+//Initialize filters
+require("./filters/version")(app, 'interpolate');
 
 //Initialize the controllers
 require("./controllers/one")(app, 'MyCtrl1');
