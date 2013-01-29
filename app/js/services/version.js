@@ -1,7 +1,7 @@
 /*
  * Module dependencies
  */
-var app = require("..")
+var app = require("../app")
   , package = require("../../../package.json");
 
 /*

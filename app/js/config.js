@@ -1,5 +1,5 @@
 //Module dependencies
-var app = require(".");
+var app = require("./app");
 
 //Initialize the templates
 var partial1 = require("../partials/partial1")

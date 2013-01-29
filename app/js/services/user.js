@@ -1,7 +1,7 @@
 /*
  * Module dependencies
  */
-var app = require("..");
+var app = require("../app")
 
 require("angular-resource");
 

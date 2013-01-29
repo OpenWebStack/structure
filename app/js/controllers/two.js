@@ -1,7 +1,7 @@
 /*
  * Module dependencies
  */
-var app = require("..")
+var app = require("../app")
   , VersionFilter = require("../filters/version")
   , VersionService = require("../services/version");
 

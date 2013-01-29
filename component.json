@@ -3,6 +3,7 @@
   "repo": "OpenWebStack/structure",
   "description": "OpenWebStack Structure",
   "version": "0.1.0",
+  "main": "app/js/app.js",
   "keywords": [],
   "dependencies": {
     "CamShaft/component-angular": "1.0.3",

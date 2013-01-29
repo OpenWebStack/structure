@@ -6,7 +6,7 @@
  */
 
 //Module dependencies
-var app = require("..");
+var app = require("../app");
 var UserService = require("../services/user");
 
 /*
