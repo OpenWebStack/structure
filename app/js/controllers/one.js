@@ -13,7 +13,6 @@
  * this directive can't be used in a non-component project, unless built with --standalone.
  *
  * QUESTIONS
- * what to do about dependencies? Should I require in the services here or elsewhere?
  */
 
 /**
