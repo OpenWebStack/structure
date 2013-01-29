@@ -21,6 +21,7 @@
  */
 module.exports = function(app, name){
   //Module dependencies... inject via component?
+  //probably should only "require" things that ship as part of this component, to keep it portable
   var UserService = require("../services/user");
 
   app.controller(name, ['$scope', UserService, function($scope, User){
