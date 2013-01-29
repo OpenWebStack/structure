@@ -1,16 +1,23 @@
 /**
- * DESIGN IDEA
- * Decouple this ng controller from the module, name, and directory structure
- * Controller can be reused across many projects easily
- * No need to export anything
+ * GOALS
+ * Should be as reusable across projects as possible.
+ * Projects should be able to `component install` any controller, directive, service etc
+ * and use it without modification.
+ * Should be as concise and boilerplate-free as possible.
+ *
+ * HOW
+ * Decouple pieces from the project structure.
+ * Decouple pieces from their runtime name and angular module (inject all the things).
+ * Decouple pieces from config/bootstrap/routes.
  * Only `require` dependencies that ship as part of this component, 
- * keeping it portable across projects. Let Angular inject whatever is named 'User' at runtime
+ * keeping it portable across projects. Let Angular inject whatever is named 'User' at runtime.
  * 
  * PROS
- * controller can be reused across many projects easily
+ * Angular pieces (controllers, services, directives etc):
  * 
  * CONS
- * this directive can't be used in a non-component project, unless built with --standalone.
+ * these can't be used in a non-component project, unless built with --standalone.
+ * migration from Angular to Angular+Component entails modifying every file.
  *
  * QUESTIONS
  */
@@ -21,8 +28,8 @@
  * @param  {String} name what to name the controller
  */
 module.exports = function(app, name){
-
-  app.controller(name, ['$scope', 'User', function($scope, User){
+  
+  app.controller(name, ['$scope', 'User', function one ($scope, User){
     var users = User.query(function(){
       $scope.users = users;
     });
@@ -33,4 +40,5 @@ module.exports = function(app, name){
       });
     };
   }]);
+
 };
