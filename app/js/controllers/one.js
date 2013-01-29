@@ -1,3 +1,10 @@
+/**
+ * DESIGN IDEA
+ * decouple this ng controller from any module or structure assumptions
+ * no need to export anything
+ * what about name? would be cool if it didn't even assume the name, name it elsewhere!
+ */
+
 //Module dependencies
 var app = require("..");
 var UserService = require("../services/user");
@@ -24,6 +31,3 @@ app.controller(MyCtrl1.name, [
   UserService,
   MyCtrl1
 ]);
-
-//Let others know where to find it
-module.exports = MyCtrl1.name;

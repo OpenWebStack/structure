@@ -9,10 +9,8 @@ var partial1 = require("../partials/partial1")
 var versionDirective = require("./directives/version");
 
 //Initialize the controllers
-var MyCtrl1 = require("./controllers/one")
-  , MyCtrl2 = require("./controllers/two");
-  
-console.log('MyCtrl1', MyCtrl1);
+require("./controllers/one");
+require("./controllers/two");
 
 //Configure the app
 app.config([
@@ -20,8 +18,8 @@ app.config([
   '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
-      .when("/view1", {templateUrl: partial1, controller: MyCtrl1 })
-      .when("/view2", {templateUrl: partial2, controller: MyCtrl2 })
+      .when("/view1", {templateUrl: partial1, controller: 'MyCtrl1' })
+      .when("/view2", {templateUrl: partial2, controller: 'MyCtrl2' })
       .otherwise({redirectTo: "/view1"});
   }
 ]);
