@@ -8,7 +8,7 @@ files = [
   'app/js/lib/angular-*.js',
   'build/app.js',
 
-  //have to require the app module
+  //script that require()'s the app
   './run.js',
   
   //test assertion lib and mocks
