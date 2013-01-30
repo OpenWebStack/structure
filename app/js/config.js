@@ -1,6 +1,6 @@
-//Global dependencies
-// require("angular");
-// require("angular-resource");
+//Global script dependencies
+require('./lib/angular.js');
+require('./lib/angular-resource.js');
 
 //Module dependencies
 var app = require("./app");
