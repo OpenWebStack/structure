@@ -3,6 +3,7 @@
 - e2e tests
 - finish setting up grunt tasks
 - Unit tests for ng.js (maybe move to own repo)
+- update grunt-component-build once it merges PR #2
 
 #done
 -figure out nonobtrusive way of using Angular and RequireJS

@@ -15,8 +15,8 @@
     "grunt-simple-mocha": "~0.3.2",
     "gruntacular": "~0.1.0",
     "grunt-contrib-stylus": "0.4.0rc7",
-    "grunt-component-build": "~0.1.5",
+    "grunt-component-build": "git+https://github.com/kewah/grunt-component-build.git#a738784ce4942b",
     "nghtml": "~0.1.0",
-    "component-json": "~0.1.0"
+    "component-json": "~0.1.2"
   }
 }
