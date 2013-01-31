@@ -5,10 +5,7 @@
   "version": "0.2.0",
   "main": "app/js/config.js",
   "keywords": [],
-  "dependencies": {
-    "CamShaft/component-angular": "1.0.3",
-    "CamShaft/component-angular-resource": "1.0.3"
-  },
+  "dependencies": {},
   "development": {},
   "license": "MIT",
   "scripts": [
