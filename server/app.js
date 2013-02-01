@@ -6,12 +6,10 @@ var express = require('express')
   , about = require("./routes/about")
   , users = require("./routes/users");
 
-/*
- * Expose the app
- */
+//express app
 var app = module.exports = express();
 
-
+//all environments
 app.configure(function(){
   // Log the requests
   app.use(express.logger("dev"));
@@ -24,14 +22,15 @@ app.configure(function(){
   app.use(express.bodyParser());
 });
 
-/*
- * Routes
- */
-// About
-app.get("/about", about.index());
-// Users
-app.get("/users", users.index());
-app.post("/users", users.create());
-app.get("/users/:id", users.view());
-app.put("/users/:id", users.update());
-app.del("/users/:id", users.remove());
+//production environment
+app.configure('production', function(){
+  //put prod-specific stuff here
+});
+
+//here's how to set things that routes may need access to (drivers, loggers, etc)
+app.set('info', {name: "Open Web App"});
+
+//Wire up routes automatically
+fs.readdirSync(__dirname + '/routes').forEach(function(file) {
+  require('./routes/' + file)(app);
+});

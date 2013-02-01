@@ -1,84 +1,72 @@
-/*
- * Example web services.
- * One would normally communicate with a database to get the data
+/**
+ * Example web services. 
+ * One would normally communicate with a database to get the data.
  */
+module.exports = function(app){
+  
+  //mock data (nasty little hobbitses)
+  var users = [
+    {name: 'Frodo', id: 1},
+    {name: 'Samwise', id: 2},
+    {name: 'Merry', id: 3},
+    {name: 'Pippin', id: 4}
+  ];
 
-/*
- * Our mock database
- *
- * nasty little hobbitses
- */
-var users = [
-  {name: 'Frodo', id: 1},
-  {name: 'Samwise', id: 2},
-  {name: 'Merry', id: 3},
-  {name: 'Pippin', id: 4}
-];
-
-/*
- * Expose listing the users
- */
-module.exports.index = function() {
-  return function index(req, res, next) {
+  //get all users
+  app.get('/user', function(req, res){
     //real service would get all users from a real data source
     res.send(users);
-  };
-};
+  });
 
-/*
- * Expose viewing a user
- */
-module.exports.view = function() {
-  return function view(req, res, next) {
-    var id = parseInt(req.params.id);
-
-    // real service would get user from a real data source
-    var user = users[id-1];
-    
+  //get user
+  app.get('/user/:id', function(req, res){
+    //real service would get user from a real data source
+    var id = parseInt(req.params.id, 10);
+    var user = getUser(id);
     res.send(user);
-  };
-};
+  });
 
-/*
- * Expose editing a user
- */
-module.exports.update = function() {
-  return function update(req, res, next) {
-    var id = parseInt(req.params.id)
-      , user = users[id-1];
-
-    // real service would get user from a real data source
-    user.name = req.body.name;
-    
+  //update user
+  app.put('/user/:id', function(req, res){
+    var user = req.body;
+    //real service would update a real data source
+    user.awesome = true;
+    users[user.id-1] = user;
+    //return updated user
     res.send(user);
-  };
-};
+  });
 
-/*
- * Expose creating a user
- */
-module.exports.create = function() {
-  return function create(req, res, next) {
-    var newUser = req.body;
+  //create user
+  app.post('/user', function(req, res){
+    var user = req.body;
+    //real service would add user in a real data source
+    user.id = users.length;
+    user.cool = true;
+    users.push(user);
+    //return the updated user with 201 Created
+    res.set("content-location", "/users/"+user.id);
+    res.send(201, user);
+  });
 
-    newUser.id = users.length;
-
-    users.push(newUser);
-    
-    res.set("content-location", "/users/"+newUser.id);
-    res.send(201, newUser);
-  };
-};
-
-/*
- * Expose removing a user
- */
-module.exports.remove = function() {
-  return function remove(req, res, next) {
-    var id = parseInt(req.params.id);
-
-    users.splice(id-1, 1);
-
+  //delete user
+  app.del('/user/:id', function(req, res){
+    //real service would delete from a real data source
+    var id = parseInt(req.params.id, 10);
+    var user = getUser(id);
+    if (user) users.splice(user.id-1, 1);
+    //return 204 No Content
     res.send(204);
-  };
+  });
+
+  /**
+   * get user by id
+   * real service would interact with a real data source
+   * @param  {String} id
+   * @return {Object} user
+   */
+  function getUser(id){
+    return users.filter(function(user){
+      return user.id === id;
+    })[0];
+  }
 };

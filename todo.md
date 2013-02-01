@@ -4,6 +4,7 @@
 - finish setting up grunt tasks
 - Unit tests for ng.js (maybe move to own repo)
 - update grunt-component-build once it merges PR #2
+- add documentation about running startup in development mode for hot swapping
 
 #done
 -figure out nonobtrusive way of using Angular and RequireJS
