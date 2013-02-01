@@ -3,3 +3,10 @@
   Showing of 'interpolate' filter:
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p>
+
+<!-- part of this view is leveraging the ows-example controller -->
+<div ng-controller="ows-example">
+  <ul>
+    <li ng-repeat="reason in whyThisIsCool">{{reason}}</li>
+  </ul>
+</div>

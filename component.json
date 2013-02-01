@@ -5,7 +5,9 @@
   "version": "0.2.0",
   "main": "app/js/config.js",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "OpenWebStack/example-controller": "*"
+    },
   "development": {},
   "license": "MIT",
   "scripts": [
