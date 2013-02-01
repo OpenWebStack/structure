@@ -3,7 +3,7 @@ require('./lib/angular.js');
 require('./lib/angular-resource.js');
 
 //Module dependencies
-var app = require("./app");
+var app = window.app = require("./app");
 
 //Initialize the templates
 var partial1 = require("../partials/partial1")
@@ -21,7 +21,7 @@ require("./filters/version")(app);
 
 //Initialize the controllers
 require("./controllers/one")(app);
-require("./controllers/two")(app);
+require("./controllers/two");
 
 //Configure the app
 app.config([
