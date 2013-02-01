@@ -1,10 +1,10 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<h1>Using Directives and Nested Controllers</h1>
 
-<!-- part of this view is leveraging the ows-example controller -->
+<p>Showing of 'interpolate' filter:</p>
+<p>{{ 'Current version is v%VERSION%.' | interpolate }}</p>
+
+<!-- this part of this view is leveraging the ows-example controller -->
+<p>Example of a nested controller:</p>
 <div ng-controller="ows-example">
   <ul>
     <li ng-repeat="reason in whyThisIsCool">{{reason}}</li>

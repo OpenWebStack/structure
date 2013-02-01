@@ -1,4 +1,4 @@
-<h1>Users</h1>
+<h1>Basics</h1>
 <!-- Lots of nifty things happening here. We are:
   - creating an <input/> for every person in the user array
   - binding each <input/> value to the user's name
