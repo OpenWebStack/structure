@@ -16,14 +16,13 @@ module.exports = function(grunt){
     //clear
 
     watch: {
-      component: {
+      /*
+       * compile scripts with Component
+       * run unit tests with testacular (server needs to be already running)
+       */
+      app: {
         files: ["app/js/**/*.js", "app/css/**/*.css", "app/partials/**/*.nghtml"],
-        tasks: ['component']
-      },
-      //run unit tests with testacular (server needs to be already running)
-      testacular: {
-        files: ['app/js/**/*.js', 'test/browser/**/*.js'],
-        tasks: ['testacular:unit:run']
+        tasks: ['component', 'testacular:unit:run']
       },
       node: {
         files: ['server/**/*.js', 'test/node/**/*.js'],
