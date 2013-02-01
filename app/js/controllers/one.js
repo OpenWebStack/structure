@@ -7,7 +7,7 @@
  *
  * HOW
  * Decouple pieces from the project structure.
- * Decouple pieces from their runtime name and angular module (inject all the things).
+ * Decouple pieces from their runtime angular module (inject all the things).
  * Decouple pieces from config/bootstrap/routes.
  * Only `require` dependencies that ship as part of this component, 
  * keeping it portable across projects. Let Angular inject whatever is named 'User' at runtime.
@@ -21,7 +21,6 @@
 /**
  * Manage user info through CRUD operations
  * @param  {Object} app  Angular Module to attach to
- * @param  {String} name what to name the controller
  */
 module.exports = function(app){
   
