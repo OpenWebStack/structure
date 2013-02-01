@@ -2,9 +2,7 @@
  * Module dependencies
  */
 var express = require('express')
-  , fs = require('fs')
-  , about = require("./routes/about")
-  , users = require("./routes/users");
+  , fs = require('fs');
 
 //express app
 var app = module.exports = express();
