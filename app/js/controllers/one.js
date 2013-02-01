@@ -23,9 +23,9 @@
  * @param  {Object} app  Angular Module to attach to
  * @param  {String} name what to name the controller
  */
-module.exports = function(app, name){
+module.exports = function(app){
   
-  app.controller(name, ['$scope', 'User', function one ($scope, User){
+  app.controller('MyCtrl1', ['$scope', 'User', function one ($scope, User){
     var users = User.query(function(){
       $scope.users = users;
     });

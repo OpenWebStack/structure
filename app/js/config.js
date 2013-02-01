@@ -10,18 +10,18 @@ var partial1 = require("../partials/partial1")
   , partial2 = require("../partials/partial2");
 
 //Initialize the directives used outside of the controllers 
-require("./directives/version")(app, 'appVersion');
+require("./directives/version")(app);
 
 //Initialize services
-require("./services/user")(app, 'User');
-require("./services/version")(app, 'version');
+require("./services/user")(app);
+require("./services/version")(app);
 
 //Initialize filters
-require("./filters/version")(app, 'interpolate');
+require("./filters/version")(app);
 
 //Initialize the controllers
-require("./controllers/one")(app, 'MyCtrl1');
-require("./controllers/two")(app, 'MyCtrl2');
+require("./controllers/one")(app);
+require("./controllers/two")(app);
 
 //Configure the app
 app.config([
