@@ -21,7 +21,7 @@ require("./filters/version")(app);
 
 //Initialize the controllers
 require("./controllers/one")(app);
-require("./controllers/two");
+require("./controllers/two")(app);
 
 //Configure the app
 app.config([
