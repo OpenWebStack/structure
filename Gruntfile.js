@@ -21,10 +21,10 @@ module.exports = function(grunt){
         tasks: ['component']
       },
       //run unit tests with testacular (server needs to be already running)
-      // testacular: {
-      //   files: ['app/js/**/*.js', 'test/browser/**/*.js'],
-      //   tasks: ['testacular:unit:run']
-      // },
+      testacular: {
+        files: ['app/js/**/*.js', 'test/browser/**/*.js'],
+        tasks: ['testacular:unit:run']
+      },
       node: {
         files: ['server/**/*.js', 'test/node/**/*.js'],
         tasks: ['simplemocha']
@@ -75,7 +75,7 @@ module.exports = function(grunt){
         output: 'build',
         styles: true,
         scripts: [ 'app/js/**/*.js' ],
-        // sourceUrls: true,
+        sourceUrls: true,
         configure: function(builder) {
           builder.use(require("nghtml")({
             webroot: "app",
