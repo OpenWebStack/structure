@@ -75,7 +75,7 @@ module.exports = function(grunt){
         output: 'build',
         styles: true,
         scripts: [ 'app/js/**/*.js' ],
-        sourceUrls: true,
+        // sourceUrls: true,
         configure: function(builder) {
           builder.use(require("nghtml")({
             webroot: "app",
