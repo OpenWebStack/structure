@@ -27,15 +27,21 @@ fs.readdirSync(__dirname + '/routes').forEach(function(file) {
 });
 
 //require-on-steroids
+/*TODO
+  -make globFrom configurable
+  -move into own package & repo
+  -only load in development
+  -consider standalone for non-node backends
+*/
 var globsync = require('glob-whatev');
 var path = require('path');
 app.get('/require-on-steroids', function(req, res){
   var files = [];
   var glob = req.query.glob;
-  var baseUrl = req.query.baseUrl;
-  globsync.glob(baseUrl + glob).forEach(function(filepath) {
-    //strip off the baseUrl
-    filepath = filepath.split(baseUrl)[1];
+  var globFrom = 'app/js/';
+  globsync.glob(globFrom + glob).forEach(function(filepath) {
+    //strip off the globFrom
+    filepath = filepath.split(globFrom)[1];
     //strip of the extension
     filepath = filepath.split(path.extname(filepath))[0];
     files.push(filepath);
