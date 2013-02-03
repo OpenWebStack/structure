@@ -35,7 +35,7 @@ fs.readdirSync(__dirname + '/routes').forEach(function(file) {
 */
 var globsync = require('glob-whatev');
 var path = require('path');
-app.get('/require-on-steroids', function(req, res){
+app.get('/require-glob', function(req, res){
   var files = [];
   var glob = req.query.glob;
   var globFrom = 'app/js/';
