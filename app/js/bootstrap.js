@@ -19,6 +19,7 @@ require(['app'], function(){
     'lib/angular/angular-resource',
     'ng!templates/partial1.html',
     'ng!templates/partial2.html',
+    // 'ng!templates/**/*.html',
     'glob!controllers/**/*.js',
     'glob!services/**/*.js',
     'glob!filters/**/*.js',

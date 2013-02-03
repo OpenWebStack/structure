@@ -12,7 +12,7 @@ define(['text'], function(text){
       //request matching files from Node service
       var files;
       var xhr = new XMLHttpRequest();
-      xhr.open('GET', 'require-on-steroids?glob=' + name);
+      xhr.open('GET', 'require-glob?glob=' + name);
       xhr.send();
       xhr.onreadystatechange = function(){
         if (xhr.readyState === 4){
