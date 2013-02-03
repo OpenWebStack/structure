@@ -8,22 +8,21 @@ require.config({
   paths: {
     'templates': '../templates',
     'ng': 'lib/ng',
-    'text': 'lib/text'
+    'text': 'lib/text',
+    'glob': 'lib/glob'
   }
 });
 
 require(['app'], function(){
-  //now that the app module loaded
+  //now that the app module is loaded
   require([
     'lib/angular/angular-resource',
     'ng!templates/partial1.html',
     'ng!templates/partial2.html',
-    'controllers/one-ctrl', 
-    'controllers/two-ctrl',
-    'services/user',
-    'services/version-service', 
-    'filters/version-filter',
-    'directives/version-directive'
+    'glob!controllers/**/*.js',
+    'glob!services/**/*.js',
+    'glob!filters/**/*.js',
+    'glob!directives/**/*.js',
   ], 
   function(){
     //now that all the module's files are loaded

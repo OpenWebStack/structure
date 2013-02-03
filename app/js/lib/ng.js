@@ -1,7 +1,9 @@
 /* 
   RequireJS plugin that loads an HTML file and caches it as an Angular template.
   During the build it generates an inline AMD module that caches the Angular template at startup.
-  TODO: try precompiling the templates into JS functions using PhantomJS
+  TODO: 
+    -try precompiling the templates into JS functions using PhantomJS
+    -support loading all templates with glob
 */
 
 var env = this['window'] ? 'browser' : 'node';
