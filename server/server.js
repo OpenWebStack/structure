@@ -5,10 +5,12 @@ var app = express();
 //here's how to set things that routes may need access to (drivers, loggers, etc)
 app.set('info', {name: "Open Web App"});
 
-//all environments
-app.configure(function(){
+//development environment
+app.configure('development', function(){
   //serve the static assets
   app.use(express.static('app'));
+  //use requirejs-glob middleware
+  app.use(require('requirejs-glob')());
 });
 
 //production environment
