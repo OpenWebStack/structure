@@ -13,7 +13,6 @@
     "grunt-contrib-stylus": "0.4.0rc7"
   },
   "dependencies": {
-    "express": "~3.0.6",
-    "glob-whatev": "~0.1.8"
+    "express": "~3.0.6"
   }
 }
