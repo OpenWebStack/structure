@@ -16,13 +16,10 @@ define(function(){
       // during the build we load the actual file contents in Node
       if (config.isBuild){
         var glob = require.nodeRequire('requirejs-glob');
-        var fs = require.nodeRequire('fs');
-        files = glob.match(name, 'app/js/');
+        files = glob.contents(name, 'app/js/');
         buildFiles[name] = [];
         files.forEach(function(file){
-          //TODO have a glob.js func that returns the contents of the files
-          var content = fs.readFileSync('app/js/' + file + '.js');
-          buildFiles[name].push(content);
+          buildFiles[name].push(file);
         });
         load(files);
       }
