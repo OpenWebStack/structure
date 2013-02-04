@@ -10,7 +10,7 @@ app.configure('development', function(){
   //serve the static assets
   app.use(express.static('app'));
   //use requirejs-glob middleware
-  app.use(require('requirejs-glob').middleware('app/js/'));
+  app.use(require('requirejs-glob')());
 });
 
 //production environment

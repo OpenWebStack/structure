@@ -1,7 +1,8 @@
-/* Configure RequireJS and load all JS files
-  TODO: make a `grunt bootstrap` task that generates this thing
+/**
+ * Configure RequireJS and load all project files
  */
 require.config({
+  glob: 'app/js/',
   shim: {
     'app': ['lib/angular/angular']
   },
@@ -9,7 +10,7 @@ require.config({
     'templates': '../templates',
     'ng': 'lib/ng',
     'text': 'lib/text',
-    'glob': 'lib/glob'
+    'glob': '../components/requirejs-glob/lib/glob'
   }
 });
 
@@ -19,7 +20,7 @@ require(['app'], function(){
     'lib/angular/angular-resource',
     'ng!templates/partial1.html',
     'ng!templates/partial2.html',
-    // 'ng!templates/**/*.html',
+    // 'ng!templates/**/*.html', //TODO
     'glob!controllers/**/*.js',
     'glob!services/**/*.js',
     'glob!filters/**/*.js',
