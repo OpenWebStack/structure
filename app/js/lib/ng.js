@@ -4,6 +4,7 @@
   TODO: 
     -try precompiling the templates into JS functions using PhantomJS
     -support loading all templates with glob
+    -move to own repo
 */
 
 var env = this['window'] ? 'browser' : 'node';
@@ -40,10 +41,12 @@ define(['text'], function(text){
       }
     },
 
+    //TODO: \" instead of &quot;
     escapeHTML: function(html){
       return String(html)
         .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
+        // .replace(/"/g, '&quot;')
+        .replace(/"/g, '\\"')
         .replace(/\n/g, ' ');
     }
   };

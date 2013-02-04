@@ -1,22 +1,33 @@
-// var env = this['window'] ? 'browser' : 'node';
-/*TODO
-  -write() for the build
-*/
+/**
+ * TODO
+ * make "from" param work not needed here
+ * docs 
+ */
 
-define(function(text){
-  
+define(function(){
+  var buildFiles = {};
+
   return {
-    buildMap:{},
+    /**
+     * load matched files, using the server to help find matches
+     */
     load:function(name, req, load, config) {
       var files;
+      // during the build we load the actual file contents in Node
       if (config.isBuild){
-        //request matching files from Node lib
         var glob = require.nodeRequire('requirejs-glob');
-        files = glob.match(name);
+        var fs = require.nodeRequire('fs');
+        files = glob.match(name, 'app/js/');
+        buildFiles[name] = [];
+        files.forEach(function(file){
+          //TODO have a glob.js func that returns the contents of the files
+          var content = fs.readFileSync('app/js/' + file + '.js');
+          buildFiles[name].push(content);
+        });
         load(files);
       }
       else{
-        //request matching files from Node web service
+        // in the browser we just request matching files from the Node web service
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'requirejs-glob?glob=' + name);
         xhr.send();
@@ -30,10 +41,21 @@ define(function(text){
           }
         };
       }
-    }
+    },
 
-    // write:function(pluginName, name, write) {
-    //   console.log('writing');
-    // }
+    /**
+     * write contents of matched files during the build
+     */
+    write:function(pluginName, name, write) {
+      if (name in buildFiles) {
+        //write the glob module
+        write('define("glob!'+name+'");');
+        //write the contents of the files
+        var files = buildFiles[name];
+        files.forEach(function(file){
+          write(file);
+        });
+      }
+    }
   };
 });
