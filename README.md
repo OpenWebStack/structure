@@ -126,6 +126,8 @@ If there are some less-frequently used templates (like an admin page) that you'd
 
 This plugin also generates an actual AMD module for each template during the build, inlining the HTML template as a JavaScript string and bundling all your templates into your one bootstrap.js file! You'll notice significant performance gains with this strategy.
 
+NOTE: Please do not put `script` tags in your Angular template files! Things will break and kittens will die. 
+
 ##Testing Your Project
 Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests.
 
