@@ -1,5 +1,9 @@
-/* Example web services. Would normally communicate with a database to get the data */
+/**
+ * Example web services. 
+ * One would normally communicate with a database to get the data.
+ */
 module.exports = function(app){
+  
   //mock data (nasty little hobbitses)
   var users = [
     {name: 'Frodo', id: 1},
@@ -10,43 +14,59 @@ module.exports = function(app){
 
   //get all users
   app.get('/user', function(req, res){
-    console.log('get all');
     //real service would get all users from a real data source
     res.send(users);
   });
 
   //get user
   app.get('/user/:id', function(req, res){
-    console.log('get');
     //real service would get user from a real data source
-    var user = users.filter(function(user){
-      return user.id === parseInt(req.params.id, 10);
-    })[0];
+    var id = parseInt(req.params.id, 10);
+    var user = getUser(id);
     res.send(user);
   });
 
-  //edit user
+  //update user
   app.put('/user/:id', function(req, res){
-    console.log('edit');
     var user = req.body;
-    //real service would update a real data source, then return edited user
+    //real service would update a real data source
     user.awesome = true;
+    users[user.id-1] = user;
+    //return updated user
     res.send(user);
   });
 
-  //add user
+  //create user
   app.post('/user', function(req, res){
-    console.log('add');
     var user = req.body;
-    //real service would add user in a real data source, then return updated user
+    //real service would add user in a real data source
+    user.id = users.length;
     user.cool = true;
-    res.send(user);
+    users.push(user);
+    //return the updated user with 201 Created
+    res.set("content-location", "/users/"+user.id);
+    res.send(201, user);
   });
 
   //delete user
   app.del('/user/:id', function(req, res){
-    console.log('delete');
     //real service would delete from a real data source
-    res.send({});
+    var id = parseInt(req.params.id, 10);
+    var user = getUser(id);
+    if (user) users.splice(user.id-1, 1);
+    //return 204 No Content
+    res.send(204);
   });
+
+  /**
+   * get user by id
+   * real service would interact with a real data source
+   * @param  {String} id
+   * @return {Object} user
+   */
+  function getUser(id){
+    return users.filter(function(user){
+      return user.id === id;
+    })[0];
+  }
 };
