@@ -9,11 +9,12 @@ We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](htt
 1. Make sure you have [NodeJS](http://nodejs.org/) installed
 2. Make sure you have [git](http://git-scm.com/book/en/Getting-Started-Installing-Git) installed
 3. `$ git clone https://github.com/OpenWebStack/structure.git && cd structure`
-4. `$ npm install -g grunt-cli testacular@canary stylus`
+4. `$ npm install -g grunt-cli testacular@canary stylus bower`
 5. `$ npm install`
-6. (optional) `install [PhantomJS](http://phantomjs.org/)` for running tests during the build
+6. `$ bower install`
+7. (optional) `install [PhantomJS](http://phantomjs.org/)` for running tests during the build
 
-Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project Node tools. That's it!
+Here we are cloning the "Structure" git repository, installing a few global (-g) Node tools, then installing the local project [Node](http://nodejs.org/) and [Bower](http://twitter.github.com/bower/) tools. That's it!
 
 ##Running the App
 Make sure you're in the structure directory, and run:

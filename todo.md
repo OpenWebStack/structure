@@ -4,6 +4,7 @@
 - e2e tests
 - finish setting up grunt tasks
 - Unit tests for ng.js (maybe move to own repo)
+- Almond.js in build
 
 #done
 -figure out nonobtrusive way of using Angular and RequireJS
