@@ -5,6 +5,7 @@
 - finish setting up grunt tasks
 - Unit tests for ng.js (maybe move to own repo)
 - Almond.js in build
+- [ ] update to latest grunt 0.4 and update plugins
 
 #done
 -figure out nonobtrusive way of using Angular and RequireJS
