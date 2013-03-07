@@ -67,8 +67,10 @@ module.exports = function(grunt){
       }
     },
 
+    //delete the previous build directory
     clean: ["build"],
 
+    //copy images to the build
     copy: {
       img: {
         src: ['app/img/**'], 
@@ -76,6 +78,7 @@ module.exports = function(grunt){
       }
     },
 
+    //inline all Angular templates as Strings into a JS file that can be concatted in the build
     ngtemplates: {
       options:  {base: 'app'},
       app: {
@@ -84,6 +87,7 @@ module.exports = function(grunt){
       }
     },
 
+    //replace all the script tags in the HTML file with the single built script
     htmlrefs: {
       options: {
         file: { 
@@ -96,6 +100,7 @@ module.exports = function(grunt){
       }
     },
 
+    //minify the HTML file (index.html)
     htmlmin: {
       index: {
         options: {
@@ -108,6 +113,7 @@ module.exports = function(grunt){
       }
     },
 
+    //combine all JS into one file, all CSS into one file
     concat: {
       js: {
         src: [
@@ -128,6 +134,7 @@ module.exports = function(grunt){
       }
     },
 
+    //minify the JS file to be as small as possible
     uglify: {
       app: {
         src: ['app/app.build.js'],
