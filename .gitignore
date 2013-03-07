@@ -1,4 +1,4 @@
 app/components
-app-build
+build
 node_modules
 app/styles/*.css

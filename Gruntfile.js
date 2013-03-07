@@ -1,20 +1,20 @@
 module.exports = function(grunt){
   //grunt plugins
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('gruntacular');
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-htmlrefs');
 
   //config
   grunt.initConfig({
-    //TODO:
-    //jshint
-    //livereload
-    //webserver (connect)
-    //clear
-
     watch: {
       //run unit tests with testacular (server needs to be already running)
       testacular: {
@@ -67,29 +67,76 @@ module.exports = function(grunt){
       }
     },
 
-    //combine & compress scripts
-    requirejs: {
-      compile: {
+    clean: ["build"],
+
+    copy: {
+      img: {
+        src: ['app/img/**'], 
+        dest: 'build/img'
+      }
+    },
+
+    ngtemplates: {
+      options:  {base: 'app'},
+      app: {
+        src: ['app/templates/**/*.html'],
+        dest: 'build/templates.js'
+      }
+    },
+
+    htmlrefs: {
+      options: {
+        file: { 
+          buildNumber: 47878 //todo generate unique from contents of file for each file
+        }
+      },
+      build: {
+        src: 'app/index.html',
+        dest: 'build/'
+      }
+    },
+
+    htmlmin: {
+      index: {
         options: {
-          appDir: "app/",
-          baseUrl: "js/",
-          dir: "app-build/",
-          optimize: 'none',
-          mainConfigFile: 'app/js/bootstrap.js',
-          modules: [
-            {name: "bootstrap"}
-          ],
-          removeCombined: true, //in the build delete files that get concatenated into others
-          logLevel: 0, //output results as they happen
-          findNestedDependencies: true, //add nested requires to the build
-          //TODO might not need this with the stylus optimizing
-          optimizeCss: "standard", 
-          inlineText: true
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        files: {
+          'build/index.html': 'build/index.html'
         }
       }
+    },
+
+    concat: {
+      js: {
+        src: [
+          'app/js/lib/angular/angular.js',
+          'app/js/lib/angular/angular-resource.js',
+          'app/js/app.js',
+          'app/js/controllers/**/*.js', 
+          'app/js/services/**/*.js', 
+          'app/js/filters/**/*.js', 
+          'app/js/directives/**/*.js',
+          'build/templates.js'
+        ],
+        dest: 'app/app.build.js'
+      },
+      styles: {
+        src: ['app/styles/**/*.css'],
+        dest: 'build/styles/app.css'
+      }
+    },
+
+    uglify: {
+      app: {
+        src: ['app/app.build.js'],
+        dest: 'build/app.min.js'
+      }
     }
+
   });
 
   grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
-  grunt.registerTask('build', ['stylus', 'requirejs']);
+  grunt.registerTask('build', ['clean', 'stylus', 'copy', 'ngtemplates', 'htmlrefs', 'htmlmin', 'concat', 'uglify']);
 };

@@ -9,14 +9,12 @@ app.set('info', {name: "Open Web App"});
 app.configure('development', function(){
   //serve the static assets
   app.use(express.static('app'));
-  //use requirejs-glob middleware
-  app.use(require('requirejs-glob')());
 });
 
 //production environment
 app.configure('production', function(){
   //serve the optimized static assets
-  app.use(express.static('app-build'));
+  app.use(express.static('build'));
 });
 
 //middleware

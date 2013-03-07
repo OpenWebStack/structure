@@ -2,18 +2,23 @@
   "name": "App",
   "version": "0.1.0",
   "devDependencies": {
-    "grunt": "0.4.0rc7",
+    "grunt": "0.4.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-contrib-copy": "~0.4.0",
+    "grunt-contrib-stylus": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-uglify": "~0.1.2",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-htmlmin": "~0.1.1",
     "should": "1.2.x",
     "expect.js": "0.2.x",
-    "grunt-contrib-watch": "0.2.x",
-    "grunt-contrib-requirejs": "~0.3.4",
-    "grunt-clear": "0.1.x",
+    "grunt-angular-templates": "~0.3.0",
+    "grunt-clear": "~0.2.0",
     "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
-    "gruntacular": "~0.1.0",
-    "grunt-contrib-stylus": "0.4.0rc7"
+    "gruntacular": "~0.2.2",
+    "grunt-htmlrefs": "~0.3.0"
   },
   "dependencies": {
-    "express": "~3.0.6",
-    "requirejs-glob": "~0.1.2"
+    "express": "~3.1.0"
   }
 }

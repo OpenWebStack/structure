@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
   <meta charset="utf-8">
   <title>My AngularJS App</title>
@@ -15,6 +15,17 @@
 
   <div>OpenWebStack Structure: v<span app-version></span></div>
 
-  <script src="js/lib/require.js" data-main="js/bootstrap.js"></script>
+  <!-- build:js app.min.js -->
+  <script src="js/lib/angular/angular.js"></script>
+  <script src="js/lib/angular/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/one-ctrl.js"></script>
+  <script src="js/controllers/two-ctrl.js"></script>
+  <script src="js/directives/version-directive.js"></script>
+  <script src="js/filters/version-filter.js"></script>
+  <script src="js/services/user.js"></script>
+  <script src="js/services/version-service.js"></script>
+  <!-- endbuild -->
+
 </body>
 </html>
