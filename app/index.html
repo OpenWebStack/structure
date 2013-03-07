@@ -12,7 +12,6 @@
   </ul>
 
   <div ng-view></div>
-
   <div>OpenWebStack Structure: v<span app-version></span></div>
 
   <!-- build:js app.min.js -->
@@ -26,6 +25,12 @@
   <script src="js/services/user.js"></script>
   <script src="js/services/version-service.js"></script>
   <!-- endbuild -->
-
+  <!-- build:remove -->
+  <script type="text/javascript">
+    document.write('<script src=\"http://'
+      + (location.host || 'localhost').split(':')[0]
+      + ':35729/livereload.js?snipver=1\"><\/script>')
+  </script>
+  <!-- endbuild -->
 </body>
 </html>
