@@ -36,10 +36,10 @@ stylus: {
   }
 }
 ```
-Now running `$ grunt stylus` will compile the stylus file into a CSS file. Running this manually every time we change a style would not be ideal, so we'll automate it using the grunt watch task:
+Now running `$ grunt stylus` will compile the stylus file into a CSS file. Running this manually every time we change a style would not be ideal, so we'll automate it using the grunt regarde task:
 
 ```js
-watch: {
+regarde: {
   stylus: {
     files: ['app/styles/**/*.styl'],
     tasks: ['stylus']
@@ -47,7 +47,7 @@ watch: {
 }
 ```
 
-Now we'll simply run `$ grunt watch` before working on stylesheets and they'll compile automatically on save. 
+Now we'll simply run `$ grunt regarde:stylus` before working on stylesheets and they'll compile automatically on save. 
 
 ##Optimizing Your Project
 We use a series of Grunt plugins to optimize the project. You can adapt these steps and config to meet the needs of your own project. Take a look at the [Gruntfile](Gruntfile.js) for this project. We'll perform a build consisting of the following steps: 
