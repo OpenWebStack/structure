@@ -13,6 +13,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('gruntacular');
   grunt.loadNpmTasks('grunt-clear');
+  grunt.loadNpmTasks('grunt-release');
   //Live Reload Plugins
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -20,6 +21,10 @@ module.exports = function(grunt){
 
   //config
   grunt.initConfig({
+
+    //tool for cutting new releases of this project
+    release: { npm: false },
+
     //for tests that run in browsers
     testacular: {
       //start testacular server (the watch task will run the tests when files change)
