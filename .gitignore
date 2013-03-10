@@ -1,4 +1,5 @@
 app/components
+app/app.build.js
 build
 node_modules
 app/styles/*.css

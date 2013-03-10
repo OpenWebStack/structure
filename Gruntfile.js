@@ -1,4 +1,3 @@
-
 module.exports = function(grunt){
   //grunt plugins
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -13,7 +12,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-htmlrefs');
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('gruntacular');
-  
+  grunt.loadNpmTasks('grunt-clear');
   //Live Reload Plugins
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -21,7 +20,6 @@ module.exports = function(grunt){
 
   //config
   grunt.initConfig({
-    
     //for tests that run in browsers
     testacular: {
       //start testacular server (the watch task will run the tests when files change)
@@ -135,21 +133,21 @@ module.exports = function(grunt){
 
     //regarde (instead of watch) watches for changes in file to fire tasks
     regarde: {
-      dev: {
-        files: [
-            'app/js/**/*.js',
-            'app/styles/**/*.css',
-            'app/**/*.html'
-        ],
-        tasks: ['livereload']
+      js: {
+        files: ['app/js/**/*.js', 'app/**/*.html'],
+        tasks: ['clear', 'livereload', 'testacular:unit:run']
       },
-      testacular: {
-        files: ['app/js/**/*.js', 'test/browser/**/*.js'],
-        tasks: ['testacular:unit:run']
+      templates: {
+        files: ['app/**/*.html'],
+        tasks: ['clear', 'livereload', 'testacular:unit:run']
       },
-      stylus: {
+      tests: {
+        files: ['test/browser/**/*.js'], 
+        tasks: ['clear', 'livereload', 'testacular:unit:run']
+      },
+      styles: {
         files: ['app/styles/**/*.styl'],
-        tasks: ['stylus']
+        tasks: ['clear', 'stylus', 'livereload']
       }
     },
 
@@ -168,7 +166,8 @@ module.exports = function(grunt){
 
   });
 
-  grunt.registerTask('test', ['testacular:continuous', 'simplemocha']);
+  grunt.registerTask('test', ['testacular:continuous']);
   grunt.registerTask('build', ['clean', 'stylus', 'copy', 'ngtemplates', 'htmlrefs', 'htmlmin', 'concat', 'uglify']);
-  grunt.registerTask('livetasks', ['livereload-start', 'connect:livereload', 'regarde']);
+  //be sure to also run the testacular:unit task when running the dev task
+  grunt.registerTask('dev', ['livereload-start', 'connect:livereload', 'regarde']);
 };
