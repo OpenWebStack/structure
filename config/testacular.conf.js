@@ -17,12 +17,6 @@ files = [
   'test/browser/**/*.js'
 ];
 
-//keep it simple: exclude any AMD/bootstrapping stuff
-exclude = [
-  'app/js/bootstrap.js',
-  'app/js/lib/ng.js'
-];
-
 browsers = ['Chrome'];
 require = 'expect';
 reporters = ['dots'];
