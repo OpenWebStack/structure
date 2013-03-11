@@ -63,21 +63,9 @@ module.exports = function(grunt){
     },
 
     //delete the previous build and generated directories
-    clean: ["build", "app/generated"],
-
-    ngmin: {
-      app: {
-        expand: true,
-        cwd: 'app/js',
-        src: [
-          'controllers/**/*.js', 
-          'directives/**/*.js', 
-          'filters/**/*.js', 
-          'services/**/*.js',
-          'app.js'
-        ],
-        dest: 'app/generated'
-      }
+    clean: {
+      build: 'build',
+      generated: 'build/generated'
     },
 
     //copy images to the build
@@ -93,7 +81,7 @@ module.exports = function(grunt){
       options:  {base: 'app'},
       app: {
         src: ['app/templates/**/*.html'],
-        dest: 'build/templates.js'
+        dest: 'build/generated/ngtemplates.js'
       }
     },
 
@@ -107,6 +95,16 @@ module.exports = function(grunt){
       build: {
         src: 'app/index.html',
         dest: 'build/'
+      }
+    },
+
+    //convert our Angular files that use simple injects to their build-safe versions
+    ngmin: {
+      app: {
+        expand: true,
+        cwd: 'app/js',
+        src: ['**/*.js', '!lib/**'],
+        dest: 'build/generated'
       }
     },
 
@@ -130,13 +128,9 @@ module.exports = function(grunt){
           'app/js/lib/angular/angular.js',
           'app/js/lib/angular/angular-resource.js',
           'app/js/app.js',
-          'app/js/controllers/**/*.js', 
-          'app/js/services/**/*.js', 
-          'app/js/filters/**/*.js', 
-          'app/js/directives/**/*.js',
-          'build/templates.js'
+          'build/generated/**/*.js' //all our angular components, including templates
         ],
-        dest: 'app/app.build.js'
+        dest: 'build/app.js'
       },
       styles: {
         src: ['app/styles/**/*.css'],
@@ -147,8 +141,8 @@ module.exports = function(grunt){
     //minify the JS file to be as small as possible
     uglify: {
       app: {
-        src: ['app/app.build.js'],
-        dest: 'build/app.min.js'
+        src: ['build/app.js'],
+        dest: 'build/app.js'
       }
     },
 
@@ -188,7 +182,20 @@ module.exports = function(grunt){
   });
 
   grunt.registerTask('test', ['testacular:continuous']);
-  grunt.registerTask('build', ['clean', 'stylus', 'copy', 'ngtemplates', 'htmlrefs', 'htmlmin', 'concat', 'uglify']);
+  /**
+   * build task explanation
+   * 1. delete the existing "build" directory.
+   * 2. compile stylus into CSS.
+   * 3. copy images into the build.
+   * 4. generate a JS file containing all our Angular templates.
+   * 5. generate build-safe versions of our Angular controllers, services, directives, filters, etc.
+   * 6. combine all our scripts, including generated versions, into a single JS file. Also combine all CSS into one file.
+   * 7. compress the single JS file.
+   * 8. replace all our <script> tags in our index.html file with a single <script> tag pointing to the combined/compressed JS file.
+   * 9. compress the index.html file.
+   * 10. delete the generated directory
+   */
+  grunt.registerTask('build', ['clean:build', 'stylus', 'copy', 'ngtemplates', 'ngmin', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:generated']);
   //be sure to also run the testacular:unit task when running the dev task
   grunt.registerTask('dev', ['livereload-start', 'connect:livereload', 'regarde']);
 };
