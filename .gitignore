@@ -1,4 +1,5 @@
 app/components
+app/generated
 app/app.build.js
 build
 node_modules

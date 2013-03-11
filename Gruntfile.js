@@ -14,6 +14,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('gruntacular');
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('grunt-release');
+  grunt.loadNpmTasks('grunt-ngmin');
   //Live Reload Plugins
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -61,8 +62,23 @@ module.exports = function(grunt){
       }
     },
 
-    //delete the previous build directory
-    clean: ["build"],
+    //delete the previous build and generated directories
+    clean: ["build", "app/generated"],
+
+    ngmin: {
+      app: {
+        expand: true,
+        cwd: 'app/js',
+        src: [
+          'controllers/**/*.js', 
+          'directives/**/*.js', 
+          'filters/**/*.js', 
+          'services/**/*.js',
+          'app.js'
+        ],
+        dest: 'app/generated'
+      }
+    },
 
     //copy images to the build
     copy: {
