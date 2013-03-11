@@ -23,7 +23,7 @@ module.exports = function(grunt){
   grunt.initConfig({
 
     //tool for cutting new releases of this project
-    release: { npm: false },
+    release: {options: {npm: false}},
 
     //for tests that run in browsers
     testacular: {
