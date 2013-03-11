@@ -1,7 +1,7 @@
 /* Example directive */
 
-angular.module('app').directive('appVersion', ['version', function(version) {
+angular.module('app').directive('appVersion', function(version) {
   return function(scope, elem, attrs) {
     elem.text(version);
   };
-}]);
+});

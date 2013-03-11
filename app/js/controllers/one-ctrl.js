@@ -1,5 +1,5 @@
 /* Example controller that uses a service to communicate with a REST web service */
-angular.module('app').controller('MyCtrl1', ['$scope', 'User', function($scope, User){
+angular.module('app').controller('MyCtrl1', function($scope, User){
   
   //get all users
   var users = User.query(function(){
@@ -37,4 +37,4 @@ angular.module('app').controller('MyCtrl1', ['$scope', 'User', function($scope, 
   user2.$save();
   */
 
-}]);
+});
