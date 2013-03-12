@@ -1,6 +1,6 @@
 /* Example controller that has dependencies to be injected */
 
-angular.module('app').controller('MyCtrl2', ['$scope', 'version', function($scope, version){
+angular.module('app').controller('MyCtrl2', function($scope, version){
   $scope.people = ['Jim', 'Jimmies', 'Jummy'];
 
   //has a dependency on our version service, which we will mock out when testing this controller
@@ -12,4 +12,4 @@ angular.module('app').controller('MyCtrl2', ['$scope', 'version', function($scop
       return prev.length > curr.length ? prev : curr;
     });
   };
-}]);
+});
