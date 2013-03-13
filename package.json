@@ -1,6 +1,6 @@
 {
   "name": "App",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-contrib-watch": "~0.3.1",
