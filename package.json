@@ -21,7 +21,7 @@
     "grunt-contrib-connect": "~0.2.0",
     "grunt-contrib-livereload": "~0.1.2",
     "grunt-release": "~0.3.1",
-    "grunt-ngmin": "git://github.com/geddesign/grunt-ngmin.git"
+    "grunt-ngmin": "~0.0.2"
   },
   "dependencies": {
     "express": "~3.1.0"
