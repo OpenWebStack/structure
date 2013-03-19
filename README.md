@@ -2,7 +2,7 @@
 The goal of this project is to show some of Angular's core concepts, and demonstrate a rock-solid setup for creating robust, scalable, and performant [Angular](http://angularjs.org/) apps. Feel free to submit ideas and improvements via pull requests. 
 
 ##Getting Started
-We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Testacular](http://vojtajina.github.com/testacular/) for managing the project. This doesn't mean you have to use Node as your backend. Node + Express is a great way to go, but feel free to use Java or whatever you prefer. Let's get setup:
+We use NodeJS-based tools like [Grunt](http://gruntjs.com/) and [Karma](http://karma-runner.github.com) for managing the project. This doesn't mean you have to use Node as your backend. Node + Express is a great way to go, but feel free to use Java or whatever you prefer. Let's get setup:
 
 1. Make sure you have [NodeJS](http://nodejs.org/) installed
 2. Make sure you have [git](http://git-scm.com/book/en/Getting-Started-Installing-Git) installed
@@ -88,12 +88,12 @@ Use [grunt-contrib-uglify](https://github.com/gruntjs/grunt-contrib-uglify) to m
 Run `$ grunt build`. kicks off these grunt tasks. An optimized copy of your `app` has been created in the `build` directory. Now all you have to do is deploy the built version of the app (build) and give yourself a high five for the awesome performance.
 
 ##Testing Your Project
-Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework, and [Testacular](http://testacular.github.com/0.6.0/index.html) as your test runner. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests.
+Unit tests are extremely important in JavaScript projects, and can even be fun to write if you use great tools and write tests while you develop (TDD/BDD). We recommend using [Mocha](http://visionmedia.github.com/mocha/) as your test framework, and [Karma](http://karma-runner.github.com) as your test runner. If you follow the conventions of this project then your Gruntfile.js is already setup for running your tests.
 
 ###Browser Tests
-Tests that run in browsers (need DOM) are best run simultaniously in your target browsers with [testacular](http://vojtajina.github.com/testacular/) and [expect.js](https://github.com/LearnBoost/expect.js) for assertions. Place these in the `test/browser` directory.
+Tests that run in browsers (need DOM) are best run simultaniously in your target browsers with [karma](http://karma-runner.github.com) and [expect.js](https://github.com/LearnBoost/expect.js) for assertions. Place these in the `test/browser` directory.
 
-Run `grunt testacular:unit` to start the testacular server. Then in a new terminal window run `grunt watch`. Now whenever you save a JS file the tests will run automatically. Learn more about using [gruntacular](https://github.com/OpenWebStack/gruntacular) plugin for running tests. 
+Run `grunt karma:unit` to start the karma server. Then in a new terminal window run `grunt watch`. Now whenever you save a JS file the tests will run automatically. Learn more about using [grunt-karma](https://github.com/karma-runner/grunt-karma) plugin for running tests.
 
 ###Node Tests
 Tests that are pure JavaScript (don't use DOM) can run in Node and use [should.js](https://github.com/visionmedia/should.js/) for assertions. Place these in the `test/node` directory.

@@ -15,7 +15,7 @@
     "grunt-angular-templates": "~0.3.0",
     "grunt-clear": "~0.2.0",
     "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
-    "gruntacular": "~0.2.2",
+    "grunt-karma": "~0.3.0",
     "grunt-htmlrefs": "~0.3.0",
     "grunt-regarde": "~0.1.1",
     "grunt-contrib-connect": "~0.2.0",

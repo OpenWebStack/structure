@@ -11,7 +11,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('grunt-htmlrefs');
   grunt.loadNpmTasks('grunt-simple-mocha');
-  grunt.loadNpmTasks('gruntacular');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-ngmin');
@@ -27,14 +27,14 @@ module.exports = function(grunt){
     release: {options: {npm: false}},
 
     //for tests that run in browsers
-    testacular: {
-      //start testacular server (the watch task will run the tests when files change)
+    karma: {
+      //start karma server (the watch task will run the tests when files change)
       unit: {
-        configFile: 'config/testacular.conf.js',
+        configFile: 'config/karma.conf.js',
       },
       //continuous integration mode for the build: run tests once in PhantomJS browser.
       continuous: {
-        configFile: 'config/testacular.conf.js',
+        configFile: 'config/karma.conf.js',
         singleRun: true,
         browsers: ['PhantomJS']
       },
@@ -150,15 +150,15 @@ module.exports = function(grunt){
     regarde: {
       js: {
         files: ['app/js/**/*.js', 'app/**/*.html'],
-        tasks: ['clear', 'livereload', 'testacular:unit:run']
+        tasks: ['clear', 'livereload', 'karma:unit:run']
       },
       templates: {
         files: ['app/**/*.html'],
-        tasks: ['clear', 'livereload', 'testacular:unit:run']
+        tasks: ['clear', 'livereload', 'karma:unit:run']
       },
       tests: {
         files: ['test/browser/**/*.js'], 
-        tasks: ['clear', 'livereload', 'testacular:unit:run']
+        tasks: ['clear', 'livereload', 'karma:unit:run']
       },
       styles: {
         files: ['app/styles/**/*.styl'],
@@ -181,7 +181,7 @@ module.exports = function(grunt){
 
   });
 
-  grunt.registerTask('test', ['testacular:continuous']);
+  grunt.registerTask('test', ['karma:continuous']);
   /**
    * build task explanation
    * 1. delete the existing "build" directory.
@@ -196,6 +196,6 @@ module.exports = function(grunt){
    * 10. delete the generated directory
    */
   grunt.registerTask('build', ['clean:build', 'stylus', 'copy', 'ngtemplates', 'ngmin', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:generated']);
-  //be sure to also run the testacular:unit task when running the dev task
+  //be sure to also run the karma:unit task when running the dev task
   grunt.registerTask('dev', ['livereload-start', 'connect:livereload', 'regarde']);
 };
