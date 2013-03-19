@@ -196,6 +196,8 @@ module.exports = function(grunt){
    * 10. delete the generated directory
    */
   grunt.registerTask('build', ['clean:build', 'stylus', 'copy', 'ngtemplates', 'ngmin', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:generated']);
-  //be sure to also run the testacular:unit task when running the dev task
+
+  // 'dev' task calls 'regarde' which indirectly calls 'testacular:unit:run'. This expects to connect to a testacular server on port 9100.
+  // therefore, be sure to run the testacular:unit task in a separate console when running the dev task.
   grunt.registerTask('dev', ['livereload-start', 'connect:livereload', 'regarde']);
 };
