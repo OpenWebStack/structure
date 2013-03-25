@@ -14,7 +14,7 @@
     "expect.js": "0.2.x",
     "grunt-angular-templates": "~0.3.0",
     "grunt-clear": "~0.2.0",
-    "grunt-simple-mocha": "git+https://github.com/geddesign/grunt-simple-mocha.git#8921a68ba83e3e5",
+    "grunt-simple-mocha": "git+https://github.com/geddski/grunt-simple-mocha.git#8921a68ba83e3e53b3ea5d933883764c750053f9",
     "grunt-karma": "~0.3.0",
     "grunt-htmlrefs": "~0.3.0",
     "grunt-regarde": "~0.1.1",
