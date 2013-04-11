@@ -30,14 +30,14 @@ module.exports = function(grunt){
     karma: {
       //start karma server (the watch task will run the tests when files change)
       unit: {
-        configFile: 'config/karma.conf.js',
+        configFile: 'config/karma.conf.js'
       },
       //continuous integration mode for the build: run tests once in PhantomJS browser.
       continuous: {
         configFile: 'config/karma.conf.js',
         singleRun: true,
         browsers: ['PhantomJS']
-      },
+      }
     },
 
     //for tests that run in Node
@@ -127,7 +127,7 @@ module.exports = function(grunt){
         src: [
           'app/js/lib/angular/angular.js',
           'app/js/lib/angular/angular-resource.js',
-          'app/js/app.js',
+//          'app/js/app.js',    //  this is redundant with the glob on next line, because ngmin already picked up app.js
           'build/generated/**/*.js' //all our angular components, including templates
         ],
         dest: 'build/app.js'
