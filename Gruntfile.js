@@ -15,10 +15,6 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-clear');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-ngmin');
-  //Live Reload Plugins
-  grunt.loadNpmTasks('grunt-regarde');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-livereload');
 
   //config
   grunt.initConfig({
@@ -30,7 +26,8 @@ module.exports = function(grunt){
     karma: {
       //start karma server (the watch task will run the tests when files change)
       unit: {
-        configFile: 'config/karma.conf.js'
+        configFile: 'config/karma.conf.js',
+        background: true
       },
       //continuous integration mode for the build: run tests once in PhantomJS browser.
       continuous: {
@@ -71,7 +68,7 @@ module.exports = function(grunt){
     //copy images to the build
     copy: {
       img: {
-        src: ['app/img/**'], 
+        src: ['app/img/**'],
         dest: 'build/img'
       }
     },
@@ -88,7 +85,7 @@ module.exports = function(grunt){
     //replace all the script tags in the HTML file with the single built script
     htmlrefs: {
       options: {
-        file: { 
+        file: {
           buildNumber: 47878 //todo generate unique from contents of file for each file
         }
       },
@@ -127,7 +124,6 @@ module.exports = function(grunt){
         src: [
           'app/js/lib/angular/angular.js',
           'app/js/lib/angular/angular-resource.js',
-//          'app/js/app.js',    //  this is redundant with the glob on next line, because ngmin already picked up app.js
           'build/generated/**/*.js' //all our angular components, including templates
         ],
         dest: 'build/app.js'
@@ -146,39 +142,27 @@ module.exports = function(grunt){
       }
     },
 
-    //regarde (instead of watch) watches for changes in file to fire tasks
-    regarde: {
+    watch: {
+      options: {
+        livereload: true
+      },
       js: {
         files: ['app/js/**/*.js', 'app/**/*.html'],
-        tasks: ['clear', 'livereload', 'karma:unit:run']
+        tasks: ['clear', 'karma:unit:run']
       },
       templates: {
         files: ['app/**/*.html'],
-        tasks: ['clear', 'livereload', 'karma:unit:run']
+        tasks: ['clear', 'karma:unit:run']
       },
       tests: {
-        files: ['test/browser/**/*.js'], 
-        tasks: ['clear', 'livereload', 'karma:unit:run']
+        files: ['test/browser/**/*.js'],
+        tasks: ['clear', 'karma:unit:run']
       },
       styles: {
         files: ['app/styles/**/*.styl'],
-        tasks: ['clear', 'stylus', 'livereload']
-      }
-    },
-
-    //launch a tiny-lr server for livereload
-    connect: {
-      livereload: {
-        options: {
-          port: 9001,
-          middleware: function(connect, options) {
-            return [require('grunt-contrib-livereload/lib/utils').livereloadSnippet, (function(c,p) {
-              return c.static(require('path').resolve(p));})(connect, '.')]
-          }
-        }
+        tasks: ['clear', 'stylus']
       }
     }
-
   });
 
   grunt.registerTask('test', ['karma:continuous']);
@@ -196,7 +180,7 @@ module.exports = function(grunt){
    * 10. delete the generated directory
    */
   grunt.registerTask('build', ['clean:build', 'stylus', 'copy', 'ngtemplates', 'ngmin', 'concat', 'uglify', 'htmlrefs', 'htmlmin', 'clean:generated']);
-  // 'dev' task calls 'regarde' which indirectly calls 'testacular:unit:run'. This expects to connect to a testacular server on port 9100.
-  // therefore, be sure to run the testacular:unit task in a separate console when running the dev task.
-  grunt.registerTask('dev', ['livereload-start', 'connect:livereload', 'regarde']);
+  // 'dev' task calls 'watch' which indirectly calls 'karma:unit:run'. This expects to connect to a karma server on port 9100.
+  // therefore, be sure to run the karma:unit task in a separate console when running the dev task.
+  grunt.registerTask('dev', ['karma:unit', 'watch']);
 };
